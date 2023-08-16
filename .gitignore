@@ -1,2 +1,5 @@
 *.html
 *.xml
+browser_test/credentials.resource
+browser_test/browser
+browser_test/playwright-log.txt

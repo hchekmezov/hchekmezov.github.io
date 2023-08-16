@@ -3,7 +3,7 @@ Library    SeleniumLibrary
 Library    Collections
 Library    String
 Library    RequestsLibrary
-Library  JSONLibrary
+Library    JSONLibrary
 
 Suite Setup    Log  I am inside Test Suite Setup
 Suite Teardown    Log    I am inside Test Suite Teardown
@@ -165,4 +165,88 @@ GET_API_Test
     ${length_by_robot}      Get Length    ${fact}
     Should Be Equal As Integers     ${length_by_robot}      ${length_from_json}
 
+CollectionsTest
+    [Documentation]    This is a collections test
+    @{L1}=   Create List
+    @{L2}=   Create List
+    Append To List    ${L1}     xxx
+    Append To List   ${L2}      JUST
+    @{x}=   Combine Lists    ${L1}  ${L2}
+    Log     ${x}
 
+StringTest
+    [Documentation]    This is a string test
+    ${golova}=      Set Variable    hihiih\nprosto\nhahaha
+    Log    ${golova}
+    ${first}=   Get Line Count     ${golova}
+    Log     ${first}
+
+JSON_Test_Add_As_New_Elem
+    [Tags]    JSON_Test
+    ${json_object}=     Load Json From File    ${CURDIR}/training.json
+    ${dict}=    Create Dictionary   longitude=13.12    latitude=130.15
+    ${json}=    Add Object To Json    ${json_object}    $    ${dict}
+    Dump Json To File    ${CURDIR}/result.json    ${json}
+
+
+JSON_Test_Add_As_Child
+    [Tags]     JSON_Test
+    ${json_object}=     Load Json From File    ${CURDIR}/training.json
+    ${dict}=    Create Dictionary   longitude=13.12    latitude=130.15
+    ${json}=    Add Object To Json    ${json_object}    $.geography    ${dict}
+    Dump Json To File    ${CURDIR}/result.json    ${json}
+
+JSON_Test_Add_To_Existing
+    [Tags]    JSON_Test
+    ${json_object}=     Load Json From File    ${CURDIR}/training.json
+    ${dict}=    Create Dictionary   longitude=13.12    latitude=130.15
+    ${json}=    Add Object To Json    ${json_object}    $..address.geography    ${dict}
+    Dump Json To File    ${CURDIR}/result.json    ${json}
+
+JSON_Test_Add_to_Existing_As_List
+    [Tags]    JSON_Test
+    ${json_object}=     Load Json From File    ${CURDIR}/training.json
+    ${lst}=    Create List   13.12    130.15
+    ${json}=    Add Object To Json    ${json_object}    $..address.geography    ${lst}
+    Dump Json To File    ${CURDIR}/result.json    ${json}
+
+
+
+JSON_Test_Delete_Object_From_JSON1
+    [Tags]    JSON_Test
+    ${json_object}=     Load Json From File    ${CURDIR}/result.json
+    ${json}=    Delete Object From Json    ${json_object}    $..address.geography
+    Dump Json To File    ${CURDIR}/result.json    ${json}
+
+JSON_Test_Delete_Object_From_JSON2
+    [Tags]    JSON_Test
+    ${json_object}=     Load Json From File    ${CURDIR}/result.json
+    ${json}=    Delete Object From Json    ${json_object}    $.geography
+    Dump Json To File    ${CURDIR}/result.json    ${json}
+
+JSON_Test_Delete_Value_From_Array
+    [Tags]    JSON_Test
+    ${json_object}=     Load Json From File    ${CURDIR}/result.json
+    ${json}=    Delete Object From Json    ${json_object}    $..address.geography[1]
+    Dump Json To File    ${CURDIR}/result.json    ${json}
+
+
+JSON_Test_Update_Value
+    [Tags]    JSON_Test
+    ${json_object}=     Load Json From File    ${CURDIR}/training.json
+    ${json}=    Update Value To Json    ${json_object}     $.lastName    Chekmezov
+    Dump Json To File    ${CURDIR}/result.json    ${json}
+
+JSON_Test_Update_Array
+    [Tags]    JSON_Test
+    ${list}=    Create List    just    a     new    list
+    ${json_object}=     Load Json From File    ${CURDIR}/training.json
+    ${json}=    Update Value To Json    ${json_object}    $.phoneNumbers    ${list}
+    Dump Json To File    ${CURDIR}/result.json    ${json}
+
+JSON_Test_Update_Array_Having_Objects
+    [Tags]    JSON_Test
+    ${dict}=    Create Dictionary    mobile=0066777    telephone=5555555566666
+    ${json_object}=     Load Json From File    ${CURDIR}/training.json
+    ${json}=    Update Value To Json    ${json_object}    $.address    ${dict}
+    Dump Json To File    ${CURDIR}/result.json    ${json}
