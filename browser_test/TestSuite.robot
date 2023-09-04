@@ -15,6 +15,8 @@ ${URL_ROZETKA}     https://rozetka.com.ua/ua
 @{CREDENTIALS_ORANGE}  Admin   admin123
 ${PRODUCT}         TP-LINK
 ${get_order_button}     //*[@class='button button_size_large button_color_green cart-receipt__submit ng-star-inserted']
+${papa}    papa
+${xpath_user_status_enabled_button}    //button[contains(@class, 'StatusEnabled')]
 
 *** Keywords ***
 Parse Price
@@ -36,6 +38,10 @@ List Should Be Sorted In Ascending Order
 
 
 *** Test Cases ***
+Temporary Test
+    ${status_equals}    Run Keyword And Return Status    Get Element    ${xpath_user_status_enabled_button}
+    Log    ${status_equals}
+
 My First Test
     [Documentation]    This is my first Browser Test
     New Browser    browser=${browser}       headless=False
@@ -75,6 +81,12 @@ RozetkaSortTest
         Append To List      ${parced_prices}    ${parsed_price}
     END
     List Should Be Sorted In Ascending Order    @{parced_prices}
+    New Page    https://www.google.com
+    ${pages}    get page ids
+    ${pages-length}    Get Length    ${pages}
+    Log    ${pages}[${${pages-length} - 1}]
+    Switch Page    ${pages}[${${pages-length} - 2}]
+    Sleep    3
     Close Browser
 
 RozetkaAddToCartTest
@@ -118,24 +130,32 @@ RozetkaAddToCartTest
 RozetkaLoginTest
     [Tags]    LOGIN_TEST
     [Documentation]    Login test implementation
-    New Browser    browser=${browser}       headless=False
+    New Browser    browser=${browser}       headless=False    args=["--start-maximized"]
+    New Context    viewport=${None}
     New Page        ${URL_ROZETKA}
-    Set Viewport Size       width=1500       height=900
-    Click                   //rz-user
-    ${login_window_title}=      Get Element    //*[@class='modal__heading']
-    ${login_window_title}=      Get Text       ${login_window_title}
-    Should Contain      ${login_window_title}   ${login_window_title_uk_ua}
-    Type Secret       id=auth_email       $phone_rozetka
-    Type Secret       id=auth_pass        $password_rozetka
-    Click       //button[contains(text(), '${login_window_enter_button_text_uk_ua}')]
-    Sleep    4
-    Wait For Condition    Element States      id=auth_email   contains      detached   timeout=200 s
-    Wait For Condition      Element States    id=confirmPhoneCode       contains      detached   timeout=200 s
-#    ${attr}=       Get Property    //app-root[@ng-server-context="ssr"]/..        className
+    Sleep    5
+    Wait For Elements State    //a[@class='ploxo']    detached    timeout=30
+#    Set Viewport Size       width=1500       height=900
+#    Click                   //rz-user
+#    ${login_window_title}=      Get Element    //*[@class='modal__heading']
+#    ${login_window_title}=      Get Text       ${login_window_title}
+#    Should Contain      ${login_window_title}   ${login_window_title_uk_ua}
+#    Type Secret       id=auth_email       $phone_rozetka
+#    Type Secret       id=auth_pass        $password_rozetka
+#    Click       //button[contains(text(), '${login_window_enter_button_text_uk_ua}')]
+#    Wait For Condition    Element States      id=auth_email   contains      detached   timeout=200 s
+#    Wait For Condition      Element States    id=confirmPhoneCode       contains      detached   timeout=200 s
+#    ${prop}=       Get Property    //input[@name='search']        className
+#    ${attr}=       Get Attribute    //input[@name='search']        class
+#    Log    ${prop}
+#    Log    ${attr}
 #    Log        ${attr}
 #    Wait For Condition    Property    //app-root[@ng-server-context="ssr"]/..   className   ==      timeout=5000s
-    Focus    //rz-mobile-user-menu
-    Click    //rz-mobile-user-menu
-    Sleep   1
-    ${logout_button}=       Get Element    //button[contains(text(), '${log_out_uk_ua}')]
+#    Focus    //rz-mobile-user-menu
+#    Click    //rz-mobile-user-menu
+#    Sleep   1
+#    ${logout_button}=       Get Element    //button[contains(text(), '${log_out_uk_ua}')]
     Close Browser
+
+
+
