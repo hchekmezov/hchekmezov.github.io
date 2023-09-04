@@ -1,4 +1,4 @@
-name: Selenoid tests
+name: Robot + Browser
 
 on: [workflow_dispatch]
 
