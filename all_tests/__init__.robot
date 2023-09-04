@@ -17,6 +17,7 @@ Setup Firstly
     ${preprod}    Set Variable    preprod
     ${is_integration}    Run Keyword And Return Status    Should Contain    ${lower_includes}    ${integration}
     ${is_preprod}    Run Keyword And Return Status    Should Contain    ${lower_includes}    ${preprod}
+    ${is_integration}    Set Variable    ${True}
     IF    ${is_integration}
         Set Global Variable    ${CURENV}    ${integration}
         Log    Integration

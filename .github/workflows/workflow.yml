@@ -23,3 +23,9 @@ jobs:
 
     - name: Launch Tests
       run: robot all_tests
+
+    - name: Archive code coverage results
+      uses: actions/upload-artifact@v3
+      with:
+        name: code-coverage-report
+        path: /Users/runner/work/robot/robot/log.html
