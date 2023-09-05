@@ -6,10 +6,15 @@ Library    DateTime
 First Test First File
     [Tags]    INTEGRATION
     New Browser    chromium
-    New Page    https://2ip.ua/ru/
+#    New Page    https://2ip.ua/ru/
+    New Page    https://www.speedtest.net/
+    Sleep    2
     Take Screenshot    EMBED
-    ${where_is}    Get Text    (//div[@class='result']/span)[5]
-    Log    ${where_is}
+    Click    //span[@class='start-text']
+    Sleep    40
+    Take Screenshot    EMBED
+#    ${where_is}    Get Text    (//div[@class='result']/span)[5]
+#    Log    ${where_is}
     Log     First Test First File
     ${current_time}    Get Current Date    result_format=%H:%M:%S:%f    # Формат времени, который вы хотите
     Log    ${current_time}
