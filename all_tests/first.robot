@@ -6,6 +6,7 @@ Library    DateTime
 First Test First File
     [Tags]    INTEGRATION
     New Browser    chromium    headless=false
+    Set Browser Timeout    30
 #    New Page    https://2ip.ua/ru/
     New Page    https://www.speedtest.net/
     Sleep    2
