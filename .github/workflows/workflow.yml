@@ -53,4 +53,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: code-coverage-report
-        path: ./log.html
+        path: /Users/runner/work/robot/robot/all_tests/log.html
