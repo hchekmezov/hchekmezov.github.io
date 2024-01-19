@@ -1,10 +1,22 @@
 name: Robot + Browser
 
-on: [workflow_dispatch]
+on: 
+  workflow_dispatch:
+    inputs:
+      headless-mode:
+          type: boolean
+          description: Will it be in headless mode or not (beeter to be in headless)?
+      browser:
+         type: choice
+         description: Which brouser should be used?
+         options:
+         - chromium
+         - firefox
+         - webkit
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Pull project
@@ -13,7 +25,7 @@ jobs:
     - name: Install python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.9.6'
+        python-version: '3.11.0'
 
     - name: Setup Robot Framework
       run: python -m pip install robotframework
@@ -22,7 +34,7 @@ jobs:
       run: python -m pip install robotframework-browser && rfbrowser init
 
     - name: Launch Tests
-      run: robot all_tests
+      run: ls -a && robot -v BROWSER_TYPE:${{ inputs.choice }} all_tests
 
     - name: Archive code coverage results
       uses: actions/upload-artifact@v3
