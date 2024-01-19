@@ -36,7 +36,7 @@ jobs:
     - name: Launch Tests
       env: 
          mode_var: ${{ inputs.headless-mode }}
-      run: ls -a && cd all_tests && robot -v HEAD_MODE:"${{ env.mode_var }} -v BROWSER_TYPE:${{ inputs.browser }} third.robot
+      run: ls -a && cd all_tests && robot -v HEAD_MODE:${{ env.mode_var }} -v BROWSER_TYPE:${{ inputs.browser }} third.robot
 
     - name: Archive code coverage results
       uses: actions/upload-artifact@v3
