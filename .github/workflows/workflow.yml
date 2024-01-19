@@ -34,7 +34,9 @@ jobs:
       run: python -m pip install robotframework-browser && rfbrowser init
 
     - name: Launch Tests
-      run: ls -a && robot -v BROWSER_TYPE:${{ inputs.choice }} all_tests
+      env: 
+         mode_var: ${{ inputs.headless-mode }}
+      run: ls -a && cd all_tests && robot -v HEAD_MODE:"${{ env.mode_var }} -v BROWSER_TYPE:${{ inputs.browser }} third.robot
 
     - name: Archive code coverage results
       uses: actions/upload-artifact@v3
