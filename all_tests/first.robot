@@ -9,4 +9,4 @@ First Test First File
 
 Second Test First File
     [Tags]    PREPROD
-    Log    mi ne electrik
+    Fail    msg=mi ne electrik
