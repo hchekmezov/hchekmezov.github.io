@@ -43,21 +43,19 @@ jobs:
           pip install robotframework-requests robotframework-browser robotframework-selenium2library robotframework-jsonlibrary pyotp fpdf Pillow pypdf ftfy
           python3 -m Browser.entry init
 
-    - name: Run tests
-      uses: joonvena/robotframework-docker-action@v1.0
-      env: 
-         mode_var: ${{ inputs.headless-mode }}
-      with:
-        robot_tests_dir: all_tests
-        robot_options: -v HEAD_MODE:${{ env.mode_var }} -v BROWSER_TYPE:${{ inputs.browser }}
+    - name: Launch Tests
+      working-directory: ./all_tests
+      env:
+          mode_var: ${{ inputs.headless-mode }}
+      run: ls -a && robot -v HEAD_MODE:${{ env.mode_var }} -v BROWSER_TYPE:${{ inputs.browser }} first.robot
 
-    - name: Store test report
-      uses: actions/upload-artifact@v1
-      if: always()
-      with:
-        name: reports
-        path: reports
-        
     - name: Check directory
       if: always()
       run: ls -a
+    
+    - name: Archive code coverage results
+      uses: actions/upload-artifact@v3
+      with:
+        name: code-coverage-report
+        path: /Users/runner/work/robot/robot/all_tests/log.html
+
