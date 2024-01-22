@@ -47,7 +47,7 @@ jobs:
       working-directory: ./all_tests
       env:
           mode_var: ${{ inputs.headless-mode }}
-      run: ls -a && robot -v HEAD_MODE:${{ env.mode_var }} -v BROWSER_TYPE:${{ inputs.browser }} third.robot
+      run: ls -a && robot -v HEAD_MODE:${{ env.mode_var }} -v BROWSER_TYPE:${{ inputs.browser }} first.robot
 
     - name: Check directory
       if: always()
@@ -62,4 +62,5 @@ jobs:
            ./all_tests/log.html
            ./all_tests/output.xml
            ./all_tests/report.html
+           ./all_tests/browser
 
