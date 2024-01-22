@@ -51,7 +51,7 @@ jobs:
 
     - name: Check directory
       if: always()
-      run: cd all_tests && ls -a
+      run: cd all_tests && ls -a && pwd
     
     - name: Archive code coverage results
       uses: actions/upload-artifact@v3
