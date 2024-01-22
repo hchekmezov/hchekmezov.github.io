@@ -54,7 +54,7 @@ jobs:
       run: cd all_tests && ls -a && pwd
     
     - name: Archive code coverage results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v2
       if: always()
       with:
         name: code-coverage-report
