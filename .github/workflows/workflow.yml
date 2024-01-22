@@ -62,5 +62,5 @@ jobs:
            ./all_tests/log.html
            ./all_tests/output.xml
            ./all_tests/report.html
-           ./all_tests/browser/*
+           ./all_tests/browser/
 
