@@ -6,6 +6,7 @@ on:
       headless-mode:
           type: boolean
           description: Will it be in headless mode or not (beeter to be in headless)?
+          default: true
       browser:
          type: choice
          description: Which brouser should be used?
