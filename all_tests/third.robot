@@ -16,6 +16,9 @@ ${link_exit_intent}    https://the-internet.herokuapp.com/exit_intent
 ${link_login}    https://the-internet.herokuapp.com/login
 ${link_nested_frames}    https://the-internet.herokuapp.com/nested_frames
 ${link_iframes}    https://the-internet.herokuapp.com/iframe
+${link_geolocation}    https://the-internet.herokuapp.com/geolocation
+${link_horizontal_slider}    https://the-internet.herokuapp.com/horizontal_slider
+${link_hovers}    https://the-internet.herokuapp.com/hovers
 
 *** Keywords ***
 Suite Setup Action
@@ -226,9 +229,76 @@ Test IFrames
     Wait For Elements State    //iframe    visible    timeout=2s
     Sleep    0.15s
     Take Screenshot    EMBED
-    Type Text    //iframe >>> //p    clear=True    txt=my test text
+    Click    //iframe >>> //p
+    ${text}    Get Text    //iframe >>> //p
+    ${len_text}    Get Length    ${text}
+    Keyboard Key    down     Shift
+    FOR    ${i}    IN RANGE    0    ${len_text}
+        Keyboard Key    press    ArrowLeft
+    END
+    Keyboard Key    press    Delete
+    Keyboard Key    up       Shift
+    Keyboard Input    insertText    my test text
+#    type text keyword does not work
     Sleep    0.15s
     Take Screenshot    EMBED
     ${cur_text}    Get Text    //iframe >>> //p
     Should Be Equal As Strings    ${cur_text}    my test text
+    Close Browser    ALL
+
+Test Geolocation
+    [Tags]    TEST-12
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    ${permissions}    Create List    geolocation
+    New Context    viewport=${None}    acceptDownloads=true    permissions=${permissions}
+    New Page    ${link_geolocation}
+    Wait For Elements State    //h3    visible    timeout=5s
+    Set Geolocation    60.173708    24.982263    3    # Points to Korkeasaari in Helsinki.
+    Click    //button
+    Wait For Elements State    id=lat-value    visible    timeout=5s
+    ${latitude}    Get Text    id=lat-value
+    ${longtitude}    Get Text    id=long-value
+    Sleep    0.15s
+    Take Screenshot    EMBED
+    Should Be Equal As Strings    ${latitude}    60.173708
+    Should Be Equal As Strings    ${longtitude}    24.982263
+    Close Browser    ALL
+
+Test Horizontal Slider
+    [Tags]    TEST-13
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${link_horizontal_slider}
+    Wait For Elements State    //h3    visible    timeout=5s
+    Focus    //input
+    FOR    ${i}    IN RANGE    0    4
+        Keyboard Key    press    ArrowRight
+    END
+    ${value}    Get Text    id=range
+    Sleep    1
+    Take Screenshot    EMBED
+    Should Be Equal As Integers    ${value}    2
+    Close Browser    ALL
+
+Test Hovers
+    [Tags]    TEST-14
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${link_hovers}
+    Wait For Elements State    //h3    visible    timeout=5s
+    Wait For Elements State    //h5[contains(text(), 'user1')]    hidden    timeout=1s
+    Wait For Elements State    //h5[contains(text(), 'user2')]    hidden    timeout=1s
+    Wait For Elements State    //h5[contains(text(), 'user2')]    hidden    timeout=1s
+    Hover    //div[@class='figure'][1]
+    Wait For Elements State    //h5[contains(text(), 'user1')]    visible    timeout=1s
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    Hover    //div[@class='figure'][2]
+    Wait For Elements State    //h5[contains(text(), 'user2')]    visible    timeout=1s
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    Hover    //div[@class='figure'][3]
+    Wait For Elements State    //h5[contains(text(), 'user3')]    visible    timeout=1s
+    Sleep    0.3s
+    Take Screenshot    EMBED
     Close Browser    ALL

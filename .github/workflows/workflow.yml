@@ -1,15 +1,17 @@
 name: Robot + Browser
 
-on: 
+on:
+  push:
+    branches: [ master ]
   workflow_dispatch:
     inputs:
       headless-mode:
           type: boolean
-          description: Will it be in headless mode or not (beeter to be in headless)?
+          description: Will it be in headless mode or not (better to be in headless)?
           default: true
       browser:
          type: choice
-         description: Which brouser should be used?
+         description: Which browser should be used?
          options:
          - chromium
          - firefox
