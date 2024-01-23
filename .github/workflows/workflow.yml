@@ -46,11 +46,17 @@ jobs:
           pip install robotframework-requests robotframework-browser robotframework-selenium2library robotframework-jsonlibrary pyotp fpdf Pillow pypdf ftfy
           python3 -m Browser.entry init
 
-    - name: Launch Tests
+    - name: Launch Tests For Workflow Dispatch
       working-directory: ./all_tests
+      if: github.event_name == 'workflow_dispatch'
       env:
           mode_var: ${{ inputs.headless-mode }}
       run: ls -a && robot -v HEAD_MODE:${{ env.mode_var }} -v BROWSER_TYPE:${{ inputs.browser }} third.robot
+
+    - name: Launch Tests For Non Workflow Dispatch
+      working-directory: ./all_tests
+      if: github.event_name != 'workflow_dispatch'
+      run: ls -a && robot -v HEAD_MODE:true -v BROWSER_TYPE:chromium third.robot
 
     - name: Check directory
       if: always()
@@ -65,4 +71,3 @@ jobs:
           ./all_tests/log.html
           ./all_tests/report.html
           ./all_tests/output.xml
-
