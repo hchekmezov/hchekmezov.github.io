@@ -61,7 +61,7 @@ jobs:
       env:
           USERNAME_SECURE_VAR: ${{ secrets.USERNAME_SECURE }}
           PASSWORD_SECURE_VAR: ${{ secrets.PASSWORD_SECURE }}
-      run: ls -a && robot -v USERNAME_SECURE:USERNAME_SECURE_VAR -v PASSWORD_SECURE:PASSWORD_SECURE_VAR -v HEAD_MODE:true -v BROWSER_TYPE:chromium third.robot
+      run: ls -a && robot -v USERNAME_SECURE:${{ env.USERNAME_SECURE_VAR }} -v PASSWORD_SECURE:${{ env.PASSWORD_SECURE_VAR }} -v HEAD_MODE:true -v BROWSER_TYPE:chromium third.robot
 
     - name: Check directory
       if: always()
