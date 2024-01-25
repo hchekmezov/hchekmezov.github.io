@@ -508,13 +508,13 @@ Test Secure File Download
     [Tags]    TEST-23
     New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
     New Context    viewport=${None}    acceptDownloads=true
-    ${log_level}    Set Log Level    WARN
+#    ${log_level}    Set Log Level    WARN
     ${splitted_link}    Set Variable    ${link_secure_file_download.split("//")}
     New Page    ${splitted_link}[0]//${USERNAME_SECURE}:${PASSWORD_SECURE}@${splitted_link}[1]
     Wait For Elements State    //h3    visible    timeout=3s
     Go To    ${link_secure_file_download}
     Wait For Elements State    //h3    visible    timeout=3s
-    Set Log Level    ${log_level}
+#    Set Log Level    ${log_level}
     ${cur_link}    Get Url
     Log    ${cur_link}
     Wait For Elements State    //h3    visible    timeout=5s
@@ -538,7 +538,7 @@ Test Secure File Download
     Log    ${result_text}
     Close Browser    ALL
 
-Test Secure File Download
+Test Secure Shadowdom
     [Tags]    TEST-24
     New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
     New Context    viewport=${None}    acceptDownloads=true
