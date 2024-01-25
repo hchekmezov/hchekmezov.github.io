@@ -1,7 +1,9 @@
 *** Settings ***
 Library    Browser
 Library    OperatingSystem
+Library    String
 Library    ../scripts.py
+Library    Collections
 
 #Suite Setup        Suite Setup Action
 
@@ -19,6 +21,14 @@ ${link_iframes}    https://the-internet.herokuapp.com/iframe
 ${link_geolocation}    https://the-internet.herokuapp.com/geolocation
 ${link_horizontal_slider}    https://the-internet.herokuapp.com/horizontal_slider
 ${link_hovers}    https://the-internet.herokuapp.com/hovers
+${link_alerts}    https://the-internet.herokuapp.com/javascript_alerts
+${link_key_presses}    https://the-internet.herokuapp.com/key_presses
+${link_multiple_windows}    https://the-internet.herokuapp.com/windows
+${link_secure_file_download}    https://the-internet.herokuapp.com/download_secure
+${link_shadowdom}    https://the-internet.herokuapp.com/shadowdom
+${link_shifting_content}    https://the-internet.herokuapp.com/shifting_content
+
+${another_demo_link_for_learning}    https://demoqa.com
 
 *** Keywords ***
 Suite Setup Action
@@ -301,4 +311,298 @@ Test Hovers
     Wait For Elements State    //h5[contains(text(), 'user3')]    visible    timeout=1s
     Sleep    0.3s
     Take Screenshot    EMBED
+    Close Browser    ALL
+
+Test Alerts ONE
+    [Tags]    TEST-15    ALERTS
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${link_alerts}
+    Wait For Elements State    //h3    visible    timeout=5s
+    ${promise}    Promise To    Wait For Alert    action=accept
+    Click    //li/button[contains(text(), 'Alert')]
+    ${text}    Wait For      ${promise}
+    Log    ${text}
+    ${result}    Get Text    id=result
+    Should Contain    ${result}    You successfully clicked an alert
+    Sleep    0.15s
+    Take Screenshot    EMBED
+    Close Browser    ALL
+
+Test Alerts TWO
+    [Tags]    TEST-16    ALERTS
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${link_alerts}
+    Wait For Elements State    //h3    visible    timeout=5s
+    Handle Future Dialogs    action=accept
+    Click    //li/button[contains(text(), 'Alert')]
+    ${result}    Get Text    id=result
+    Should Contain    ${result}    You successfully clicked an alert
+    Sleep    0.15s
+    Take Screenshot    EMBED
+    Close Browser    ALL
+
+Test Confirm ONE
+    [Tags]    TEST-17
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${link_alerts}
+    Wait For Elements State    //h3    visible    timeout=5s
+    ${promise}    Promise To    Wait For Alert    action=accept
+    Click    //li/button[contains(text(), 'Confirm')]
+    ${text}    Wait For      ${promise}
+    Log    ${text}
+    ${result}    Get Text    id=result
+    Should Contain    ${result}    You clicked: Ok
+    Sleep    0.15s
+    Take Screenshot    EMBED
+    ${promise}    Promise To    Wait For Alert    action=dismiss
+    Click    //li/button[contains(text(), 'Confirm')]
+    ${text}    Wait For      ${promise}
+    Log    ${text}
+    ${result}    Get Text    id=result
+    Should Contain    ${result}    You clicked: Cancel
+    Sleep    0.15s
+    Take Screenshot    EMBED
+    Close Browser    ALL
+
+Test Confirm TWO
+    [Tags]    TEST-18
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${link_alerts}
+    Wait For Elements State    //h3    visible    timeout=5s
+    Handle Future Dialogs    action=dismiss
+    Click    //li/button[contains(text(), 'Confirm')]
+    ${result}    Get Text    id=result
+    Should Contain    ${result}    You clicked: Cancel
+
+#    dialog.accept: Cannot accept dialog which is already handled!
+
+#    Sleep    0.15s
+#    Take Screenshot    EMBED
+#    Handle Future Dialogs    action=accept
+#    Click    //li/button[contains(text(), 'Confirm')]
+#    ${result}    Get Text    id=result
+#    Should Contain    ${result}    You clicked: Ok
+#    Sleep    0.15s
+#    Take Screenshot    EMBED
+    Close Browser    ALL
+
+Test Prompt ONE
+    [Tags]    TEST-19
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${link_alerts}
+    Wait For Elements State    //h3    visible    timeout=5s
+    ${promise}    Promise To    Wait For Alert    action=accept    prompt_input=my accept text
+    Click    //li/button[contains(text(), 'Prompt')]
+    ${text}    Wait For      ${promise}
+    Log    ${text}
+    ${result}    Get Text    id=result
+    Should Contain    ${result}    You entered: my accept text
+    Sleep    0.15s
+    Take Screenshot    EMBED
+    ${promise}    Promise To    Wait For Alert    action=dismiss    prompt_input=my dismiss text
+    Click    //li/button[contains(text(), 'Prompt')]
+    ${text}    Wait For      ${promise}
+    Log    ${text}
+    ${result}    Get Text    id=result
+    Should Contain    ${result}    You entered: null
+    Sleep    0.15s
+    Take Screenshot    EMBED
+    Close Browser    ALL
+
+Test Prompt TWO
+    [Tags]    TEST-20
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${link_alerts}
+    Wait For Elements State    //h3    visible    timeout=5s
+    Handle Future Dialogs    action=accept    prompt_input=my accept text
+    Click    //li/button[contains(text(), 'Prompt')]
+    ${result}    Get Text    id=result
+    Should Contain    ${result}    You entered: my accept text
+    Sleep    0.15s
+    Take Screenshot    EMBED
+
+#    prompt_input is only valid if action is 'accept'
+
+#    Handle Future Dialogs    action=dismiss    prompt_input=my dismiss text
+#    Click    //li/button[contains(text(), 'Prompt')]
+#    ${result}    Get Text    id=result
+#    Should Contain    ${result}    You entered: null
+#    Sleep    0.15s
+#    Take Screenshot    EMBED
+    Close Browser    ALL
+
+Test Key Presses
+    [Tags]    TEST-21
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${link_key_presses}
+    Wait For Elements State    //h3    visible    timeout=5s
+    Click    id=target
+    Keyboard Key    press    h
+    Wait For Condition    Text    id=result    contains    You entered: H
+    Keyboard Key    press    E
+    Wait For Condition    Text    id=result    contains    You entered: E
+    Keyboard Key    press    l
+    Wait For Condition    Text    id=result    contains    You entered: L
+    Keyboard Key    press    l
+    Wait For Condition    Text    id=result    contains    You entered: L
+    Keyboard Key    press    O
+    Wait For Condition    Text    id=result    contains    You entered: O
+    Keyboard Key    press    Space
+    Wait For Condition    Text    id=result    contains    You entered: SPACE
+    Keyboard Key    press    w
+    Wait For Condition    Text    id=result    contains    You entered: W
+    Keyboard Key    press    O
+    Wait For Condition    Text    id=result    contains    You entered: O
+    Keyboard Key    press    r
+    Wait For Condition    Text    id=result    contains    You entered: R
+    Keyboard Key    press    L
+    Wait For Condition    Text    id=result    contains    You entered: L
+    Keyboard Key    press    d
+    Wait For Condition    Text    id=result    contains    You entered: D
+    Keyboard Key    down    Shift
+    Keyboard Key    press    Digit1
+    Keyboard Key    up    Shift
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    ${entered_value}    Get Property    id=target    value
+    Should Contain    ${entered_value}    hEllO wOrLd!
+    Close Browser    ALL
+
+Test Multiple Windows
+    [Tags]    TEST-22
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${link_multiple_windows}
+    Wait For Elements State    //h3    visible    timeout=5s
+    Click    //a[@href='/windows/new']
+    Sleep    0.3s
+    Take Screenshot    EMBED
+
+    ${current_context_id}    Get Context Ids    ACTIVE    ACTIVE
+    ${current_context_id}    Set Variable    ${current_context_id}[0]
+    ${current_browser_id}    Get Browser Ids    ACTIVE
+    ${current_browser_id}    Set Variable    ${current_browser_id}[0]
+
+    ${browser_catalog}    Get Browser Catalog
+    
+    ${new_page_id}    Get Page Id By Url Part    ${browser_catalog}    ${current_browser_id}    ${current_context_id}
+    ...    /windows/new
+    ${is_browser_switched}    Run Keyword And Return Status    Switch Browser    ${current_browser_id}
+    ${is_context_switched}    Run Keyword And Return Status    Switch Context    ${current_context_id}
+    ${is_page_switched}    Run Keyword And Return Status    Switch Page    ${new_page_id}
+    Wait For Elements State    //h3[contains(text(), 'New Window')]    visible    timeout=3s
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    Close Browser    ALL
+
+#    25.01
+
+Test Secure File Download
+    [Tags]    TEST-23
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Context    viewport=${None}    acceptDownloads=true
+    ${log_level}    Set Log Level    WARN
+    ${splitted_link}    Set Variable    ${link_secure_file_download.split("//")}
+    New Page    ${splitted_link}[0]//${USERNAME_SECURE}:${PASSWORD_SECURE}@${splitted_link}[1]
+    Wait For Elements State    //h3    visible    timeout=3s
+    Go To    ${link_secure_file_download}
+    Wait For Elements State    //h3    visible    timeout=3s
+    Set Log Level    ${log_level}
+    ${cur_link}    Get Url
+    Log    ${cur_link}
+    Wait For Elements State    //h3    visible    timeout=5s
+    ${download_promise}    Promise To Wait For Download
+#    ${txt_files}    Get Elements    //a[contains(@href, '.txt')]
+#    Click    ${txt_files}[0]
+    Click    //a[contains(@href, 'roles.txt')]
+    ${file_obj}=    Wait For    ${download_promise}
+    ${absolute_file_path}    Get Parent Directory    ${file_obj}[saveAs]
+    ${new_file_location}    Set Variable    ${CURDIR}/${file_obj}[suggestedFilename]
+    Move File    ${file_obj}[saveAs]    ${new_file_location}
+    File Should Exist    ${new_file_location}
+    ${contents}    Get File    ${new_file_location}
+    @{lines}    Split To Lines    ${contents}
+    ${result_text}    Set Variable    ${EMPTY}
+    FOR    ${line}    IN    @{lines}
+        ${result_text}    Set Variable    ${result_text}\n${line}
+    END
+    Remove File    ${new_file_location}
+    File Should Not Exist    ${new_file_location}
+    Log    ${result_text}
+    Close Browser    ALL
+
+Test Secure File Download
+    [Tags]    TEST-24
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${link_shadowdom}
+    Wait For Elements State    //h1    visible    timeout=3s
+
+    ${elem}    Get Element    div#content > my-paragraph >> nth=0
+    ${text}    Get Text    ${elem}
+    Should Contain    ${text}    Let's have some different text!
+
+    ${elem}    Get Element    div#content > my-paragraph >> nth=1
+    ${text}    Get Text    ${elem}
+    Should Contain    ${text}    Let's have some different text!\nIn a list!
+    
+#    ${elem}    Get Text    css=p >> nth=0 >> slot
+
+#    ${paragraphs_p_elem}    Get Elements    css=p
+#    ${paragraphs_slot_elem}    Create List
+#    ${len}    Get Length    ${paragraphs_p_elem}
+#    FOR    ${i}    IN RANGE    0    ${len}
+#        ${slot}    Get Element    ${paragraphs_p_elem}[${i}] >> slot
+#        Append To List    ${paragraphs_slot_elem}    ${slot}
+#    END
+#    Log    ${paragraphs_slot_elem}
+    Close Browser    ALL
+
+Test Shifting Content Menu Element
+    [Tags]    TEST-25
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${link_shifting_content}
+    Wait For Elements State    //h3    visible    timeout=3s
+    Click    //a[@href='/shifting_content/menu']
+
+    ${current_context_id}    Get Context Ids    ACTIVE    ACTIVE
+    ${current_context_id}    Set Variable    ${current_context_id}[0]
+    ${current_browser_id}    Get Browser Ids    ACTIVE
+    ${current_browser_id}    Set Variable    ${current_browser_id}[0]
+    ${browser_catalog}    Get Browser Catalog
+    ${menu_page_id}    Get Page Id By Url Part    ${browser_catalog}    ${current_browser_id}    ${current_context_id}
+    ...    /shifting_content/menu
+    ${is_browser_switched}    Run Keyword And Return Status    Switch Browser    ${current_browser_id}
+    ${is_context_switched}    Run Keyword And Return Status    Switch Context    ${current_context_id}
+    ${is_page_switched}    Run Keyword And Return Status    Switch Page    ${menu_page_id}
+    Wait For Elements State    //h3[contains(text(), 'Shifting Content: Menu Element')]    visible    timeout=3s
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    Click    //a[@href='/shifting_content/menu?pixel_shift=100']
+#    Cannot click
+#    Click    //a[@href='/portfolio/']
+    Focus    //a[@href='/portfolio/']
+    Keyboard Key    press    Enter
+    ${current_context_id}    Get Context Ids    ACTIVE    ACTIVE
+    ${current_context_id}    Set Variable    ${current_context_id}[0]
+    ${current_browser_id}    Get Browser Ids    ACTIVE
+    ${current_browser_id}    Set Variable    ${current_browser_id}[0]
+    ${browser_catalog}    Get Browser Catalog
+    ${portfolio_page_id}    Get Page Id By Url Part    ${browser_catalog}    ${current_browser_id}    ${current_context_id}
+    ...    /portfolio/
+    ${is_browser_switched}    Run Keyword And Return Status    Switch Browser    ${current_browser_id}
+    ${is_context_switched}    Run Keyword And Return Status    Switch Context    ${current_context_id}
+    ${is_page_switched}    Run Keyword And Return Status    Switch Page    ${portfolio_page_id}
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    ${cur_url}    Get Url
+    Should Contain    ${cur_url}    https://the-internet.herokuapp.com/portfolio/
     Close Browser    ALL

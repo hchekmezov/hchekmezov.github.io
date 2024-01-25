@@ -123,3 +123,14 @@ def built_check():
 def fix_json_format(json_string):
     fixed_text = fix_text(json_string)
     return fixed_text
+
+
+def get_page_id_by_url_part(browser_catalog, browser_id, context_id, url_part):
+    for browser in browser_catalog:
+        if browser['id'] == browser_id:
+            for context in browser['contexts']:
+                if context['id'] == context_id:
+                    for page in context['pages']:
+                        if url_part in page['url']:
+                            return page['id']
+    return None

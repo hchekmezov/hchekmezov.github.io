@@ -43,7 +43,7 @@ jobs:
     - name: Install Python dependencies
       run: |
           python3 -m pip install --upgrade pip
-          pip install robotframework-requests robotframework-browser robotframework-selenium2library robotframework-jsonlibrary pyotp fpdf Pillow pypdf ftfy
+          pip install robotframework-requests robotframework-browser robotframework-jsonlibrary pyotp fpdf Pillow pypdf ftfy
           python3 -m Browser.entry init
 
     - name: Launch Tests For Workflow Dispatch
