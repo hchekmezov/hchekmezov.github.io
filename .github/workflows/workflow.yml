@@ -53,7 +53,7 @@ jobs:
           mode_var: ${{ inputs.headless-mode }}
           USERNAME_SECURE_VAR: ${{ secrets.USERNAME_SECURE }}
           PASSWORD_SECURE_VAR: ${{ secrets.PASSWORD_SECURE }}
-      run: ls -a && robot -v USERNAME_SECURE:USERNAME_SECURE_VAR -v PASSWORD_SECURE:PASSWORD_SECURE_VAR -v HEAD_MODE:${{ env.mode_var }} -v BROWSER_TYPE:${{ inputs.browser }} third.robot
+      run: ls -a && robot -v USERNAME_SECURE:${{ env.USERNAME_SECURE_VAR }} -v PASSWORD_SECURE:${{ env.PASSWORD_SECURE_VAR }} -v HEAD_MODE:${{ env.mode_var }} -v BROWSER_TYPE:${{ inputs.browser }} third.robot
 
     - name: Launch Tests For Non Workflow Dispatch
       working-directory: ./all_tests
