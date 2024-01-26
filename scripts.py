@@ -9,8 +9,9 @@ def script(tags, tests):
     logger.console("\n You can start to print!")
     result_info = dict()
     for i in range(0, len(tags)):
-        logger.console("Number -> {}\nTags -> {}\nTests -> {}".format(i, tags[i].replace(':', '').replace(',', '').split()
-                                                                      , tests[i]))
+        logger.console(
+            "Number -> {}\nTags -> {}\nTests -> {}".format(i, tags[i].replace(':', '').replace(',', '').split()
+                                                           , tests[i]))
         result_info[tests[i]] = input()
         # result_info.append(input())
     return result_info
@@ -43,6 +44,7 @@ def reason(test):
     logger.console(f"Reason for {test}\n")
     x = input()
     return x
+
 
 def return_list_of_set(lst):
     return set(lst)
@@ -134,3 +136,16 @@ def get_page_id_by_url_part(browser_catalog, browser_id, context_id, url_part):
                         if url_part in page['url']:
                             return page['id']
     return None
+
+
+def is_cookie_exist_by_name(cookies, name):
+    for cookie in cookies:
+        if cookie['name'] == name:
+            return True
+    return False
+
+
+def create_javascript_command_for_permission_status(permission):
+    return "navigator.permissions.query({ name: '" + permission + "' })" \
+            ".then(permissionStatus => { return permissionStatus.state; })" \
+            ".catch(error => { return 'Error checking permission: ' + error; });"

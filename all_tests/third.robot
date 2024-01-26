@@ -4,6 +4,7 @@ Library    OperatingSystem
 Library    String
 Library    ../scripts.py
 Library    Collections
+Library    DateTime
 
 #Suite Setup        Suite Setup Action
 
@@ -29,6 +30,10 @@ ${link_shadowdom}    https://the-internet.herokuapp.com/shadowdom
 ${link_shifting_content}    https://the-internet.herokuapp.com/shifting_content
 
 ${another_demo_link_for_learning}    https://demoqa.com
+${demo_link_books_store}    https://demoqa.com/books
+${demo_link_checkbox}    https://demoqa.com/checkbox
+${demo_automation_practice_form}    https://demoqa.com/automation-practice-form
+${demo_link_buttons}    https://demoqa.com/buttons
 
 *** Keywords ***
 Suite Setup Action
@@ -508,13 +513,13 @@ Test Secure File Download
     [Tags]    TEST-23
     New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
     New Context    viewport=${None}    acceptDownloads=true
-#    ${log_level}    Set Log Level    WARN
+    ${log_level}    Set Log Level    WARN
     ${splitted_link}    Set Variable    ${link_secure_file_download.split("//")}
     New Page    ${splitted_link}[0]//${USERNAME_SECURE}:${PASSWORD_SECURE}@${splitted_link}[1]
     Wait For Elements State    //h3    visible    timeout=3s
     Go To    ${link_secure_file_download}
     Wait For Elements State    //h3    visible    timeout=3s
-#    Set Log Level    ${log_level}
+    Set Log Level    ${log_level}
     ${cur_link}    Get Url
     Log    ${cur_link}
     Wait For Elements State    //h3    visible    timeout=5s
@@ -605,4 +610,174 @@ Test Shifting Content Menu Element
     Take Screenshot    EMBED
     ${cur_url}    Get Url
     Should Contain    ${cur_url}    https://the-internet.herokuapp.com/portfolio/
+    Close Browser    ALL
+
+
+Test Books Store 1
+    [Tags]    TEST-26    DEMO    BOOKS
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_books_store}
+    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Book Store')]    visible    timeout=5s
+    Scroll To Element    (//a[contains(@href, '/books')])[1]
+    Sleep    0.5s
+    Take Screenshot    EMBED
+    Add Style Tag    a[href] { color: #000000; background-color: #FFFF00; }
+    Sleep    0.5s
+    Take Screenshot    EMBED
+    Scroll To Element    //span[@class='text' and contains(text(), 'Login')]
+    Sleep    0.5s
+    Take Screenshot    EMBED
+    Add Style Tag    span.text { color: #0000ff; }
+    Sleep    0.5s
+    Take Screenshot    EMBED
+    Close Browser    ALL
+
+Test Books Store 1
+    [Tags]    TEST-27    DEMO    BOOKS
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_books_store}
+    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Book Store')]    visible    timeout=5s
+    ${date}    Get Current Date    increment=15 secs
+    Add Cookie    hlib    chekmezov    domain=example.com    path=/foo/bar    expires=${date}
+    ${cookies}    Get Cookies
+    Log    ${cookies}
+    ${is_cookie_exist}    Is Cookie Exist By Name    ${cookies}    hlib
+    Should Be True    ${is_cookie_exist}
+    Sleep    15
+    ${cookies}    Get Cookies
+    Log    ${cookies}
+    ${is_cookie_exist}    Is Cookie Exist By Name    ${cookies}    hlib
+    Should Not Be True    ${is_cookie_exist}
+    Close Browser    ALL
+
+Test Checkbox
+    [Tags]    TEST-28    DEMO
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_checkbox}
+    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Check Box')]    visible    timeout=5s
+    Scroll To Element    //span[@class='rct-title' and contains(text(), 'Home')]
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    ${home_checkbox}    Get Element    //span[@class='rct-title' and contains(text(), 'Home')]/preceding-sibling::input
+    ${is_home_checked}    Get Checkbox State    ${home_checkbox}
+    Should Not Be True    ${is_home_checked}
+    ${home_toggle}    Get Element    //span[@class='rct-title' and contains(text(), 'Home')]/../preceding-sibling::button
+    Click    ${home_toggle}
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    ${desktop_checkbox}    Get Element    //span[@class='rct-title' and contains(text(), 'Desktop')]/preceding-sibling::input
+    ${is_desktop_checked}    Get Checkbox State    ${desktop_checkbox}
+    Should Not Be True    ${is_desktop_checked}
+    ${desktop_toggle}    Get Element    //span[@class='rct-title' and contains(text(), 'Desktop')]/../preceding-sibling::button
+    Click    ${desktop_toggle}
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    ${commands_checkbox}    Get Element    //span[@class='rct-title' and contains(text(), 'Commands')]/preceding-sibling::input
+    ${is_commands_checked}    Get Checkbox State    ${commands_checkbox}
+    Should Not Be True    ${is_commands_checked}
+    Check Checkbox    //span[@class='rct-title' and contains(text(), 'Commands')]/preceding-sibling::span[@class='rct-checkbox']
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    ${is_commands_checked}    Get Checkbox State    ${commands_checkbox}
+    Should Be True    ${is_commands_checked}
+    ${is_desktop_checked}    Get Checkbox State    ${desktop_checkbox}
+    Should Not Be True    ${is_desktop_checked}
+    ${is_home_checked}    Get Checkbox State    ${home_checkbox}
+    Should Not Be True    ${is_home_checked}
+    ${result}    Get Text    css=\#result
+    Should Contain    ${result}    You have selected :\ncommands
+    Uncheck Checkbox    //span[@class='rct-title' and contains(text(), 'Commands')]/preceding-sibling::span[@class='rct-checkbox']
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    ${is_commands_checked}    Get Checkbox State    ${commands_checkbox}
+    Should Not Be True    ${is_commands_checked}
+    Wait For Elements State    id=result    detached    timeout=5s
+    Close Browser    ALL
+
+
+Test Permissions DEMO
+    [Tags]    TEST-29    DEMO
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Context    viewport=${None}    acceptDownloads=true
+    Grant Permissions    geolocation    notifications
+    New Page    ${demo_automation_practice_form}
+    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Practice Form')]    visible    timeout=4s
+
+    ${js_command}    Create Javascript Command For Permission Status    geolocation
+    ${result}    Evaluate Javascript    ${None}    ${js_command}
+    ${is_failed}    Run Keyword And Return Status    Should Contain    ${result}    Error
+    Run Keyword If    ${is_failed}    Fail    msg=Some Error Occured:\n ${result}
+    Should Be Equal As Strings    granted    ${result}
+
+    ${js_command}    Create Javascript Command For Permission Status    camera
+    ${result}    Evaluate Javascript    ${None}    ${js_command}
+    ${is_failed}    Run Keyword And Return Status    Should Contain    ${result}    Error
+    Run Keyword If    ${is_failed}    Fail    msg=Some Error Occured:\n ${result}
+    Should Be Equal As Strings    denied    ${result}
+
+    ${js_command}    Create Javascript Command For Permission Status    notifications
+    ${result}    Evaluate Javascript    ${None}    ${js_command}
+    ${is_failed}    Run Keyword And Return Status    Should Contain    ${result}    Error
+    Run Keyword If    ${is_failed}    Fail    msg=Some Error Occured:\n ${result}
+    Should Be Equal As Strings    granted    ${result}
+
+    Clear Permissions
+
+    ${js_command}    Create Javascript Command For Permission Status    geolocation
+    ${result}    Evaluate Javascript    ${None}    ${js_command}
+    ${is_failed}    Run Keyword And Return Status    Should Contain    ${result}    Error
+    Run Keyword If    ${is_failed}    Fail    msg=Some Error Occured:\n ${result}
+    Should Be Equal As Strings    prompt    ${result}
+
+    ${js_command}    Create Javascript Command For Permission Status    notifications
+    ${result}    Evaluate Javascript    ${None}    ${js_command}
+    ${is_failed}    Run Keyword And Return Status    Should Contain    ${result}    Error
+    Run Keyword If    ${is_failed}    Fail    msg=Some Error Occured:\n ${result}
+    Should Be Equal As Strings    prompt    ${result}
+
+    Close Browser    ALL
+
+Test Clear Text
+    [Tags]    TEST-30    DEMO
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_automation_practice_form}
+    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Practice Form')]    visible    timeout=4s
+    ${name}    Get Text    id=firstName
+    Should Be Equal As Strings    ${EMPTY}    ${name}
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    Type Text    id=firstName    Hlib4ik
+    ${name}    Get Text    id=firstName
+    Should Be Equal As Strings    Hlib4ik    ${name}
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    Clear Text    id=firstName
+    ${name}    Get Text    id=firstName
+    Should Be Equal As Strings    ${EMPTY}    ${name}
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    Close Browser    ALL
+
+Test Buttons
+    [Tags]    TEST-31    DEMO
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_buttons}
+    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Buttons')]    visible    timeout=5s
+    Click With Options    id=doubleClickBtn    clickCount=2
+    Wait For Condition    Text    id=doubleClickMessage    contains    You have done a double click
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    Click    id=rightClickBtn    button=right
+    Wait For Condition    Text    id=rightClickMessage    contains    You have done a right click
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    Click    (//button[contains(text(), 'Click Me')])[3]
+    Wait For Condition    Text    id=dynamicClickMessage    contains    You have done a dynamic click
+    Sleep    0.3s
+    Take Screenshot    EMBED
     Close Browser    ALL
