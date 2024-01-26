@@ -526,7 +526,7 @@ Test Secure File Download
     ${download_promise}    Promise To Wait For Download
 #    ${txt_files}    Get Elements    //a[contains(@href, '.txt')]
 #    Click    ${txt_files}[0]
-    Click    //a[contains(@href, 'roles.txt')]
+    Click    (//a[contains(@href, '.txt')])[1]
     ${file_obj}=    Wait For    ${download_promise}
     ${absolute_file_path}    Get Parent Directory    ${file_obj}[saveAs]
     ${new_file_location}    Set Variable    ${CURDIR}/${file_obj}[suggestedFilename]
@@ -633,7 +633,7 @@ Test Books Store 1
     Take Screenshot    EMBED
     Close Browser    ALL
 
-Test Books Store 1
+Test Cookies
     [Tags]    TEST-27    DEMO    BOOKS
     New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
     New Context    viewport=${None}    acceptDownloads=true
