@@ -1,4 +1,5 @@
 *.html
+!log.html
 *.xml
 browser_test/credentials.resource
 browser_test/browser
