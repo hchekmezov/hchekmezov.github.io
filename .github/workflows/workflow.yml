@@ -64,6 +64,22 @@ jobs:
     - name: Check directory
       if: always()
       run: cd all_tests && ls -a && pwd
+
+    - name: Move log file to /docs-directory if exists
+      if: always()
+      run: |
+        if [ -f "./all_tests/log.html" ]; then
+          echo "File exists"
+          mv ./all_tests/log.html ./docs
+        else
+          echo "File does not exist"
+        fi
+
+    - name: Commit result of the test run
+      uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        commit_message: Automated Changes From Github Actions
+        file_pattern: './docs/log.html'
     
     - name: Archive code coverage results
       uses: actions/upload-artifact@v2
