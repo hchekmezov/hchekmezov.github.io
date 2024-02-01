@@ -11,6 +11,7 @@ Library    DateTime
 *** Variables ***
 #${BROWSER_TYPE}    chromium
 #${HEAD_MODE}    false
+${link_herokuapp}    https://the-internet.herokuapp.com
 ${link_download}    https://the-internet.herokuapp.com/download
 ${link_basic_auth}    https://admin:admin@the-internet.herokuapp.com/basic_auth
 ${link_drag_and_drop}    https://the-internet.herokuapp.com/drag_and_drop
@@ -34,6 +35,7 @@ ${demo_link_books_store}    https://demoqa.com/books
 ${demo_link_checkbox}    https://demoqa.com/checkbox
 ${demo_automation_practice_form}    https://demoqa.com/automation-practice-form
 ${demo_link_buttons}    https://demoqa.com/buttons
+${demo_link_select}    https://demoqa.com/select-menu
 
 *** Keywords ***
 Suite Setup Action
@@ -780,4 +782,171 @@ Test Buttons
     Wait For Condition    Text    id=dynamicClickMessage    contains    You have done a dynamic click
     Sleep    0.3s
     Take Screenshot    EMBED
+    Close Browser    ALL
+
+Test Close Context
+    [Tags]    TEST-32
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_buttons}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State    
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Buttons')]    visible    timeout=5s
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    Close Context    CURRENT    CURRENT
+    New Context    acceptDownloads=true
+    New Page    ${demo_automation_practice_form}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Practice Form')]    visible    timeout=4s
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    Close Browser    ALL
+
+Test Close Page 1
+    [Tags]    TEST-33
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_buttons}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Buttons')]    visible    timeout=5s
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    Close Page    CURRENT    CURRENT    CURRENT
+    New Page    ${demo_automation_practice_form}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Practice Form')]    visible    timeout=4s
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    Close Browser    ALL
+
+Test Close Page 2
+    [Tags]    TEST-34
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_buttons}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Buttons')]    visible    timeout=5s
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    New Page    ${demo_automation_practice_form}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Practice Form')]    visible    timeout=4s
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    Close Page    CURRENT    CURRENT    CURRENT
+    Sleep    1.5s
+    New Page    ${demo_link_checkbox}
+    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Check Box')]    visible    timeout=5s
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    Close Browser    ALL
+
+Test Close Page 3
+    [Tags]    TEST-35
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_buttons}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Buttons')]    visible    timeout=5s
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    New Page    ${demo_automation_practice_form}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Practice Form')]    visible    timeout=4s
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    Close Page    ALL    ALL    ALL
+    Sleep    1.5s
+    New Page    ${demo_link_checkbox}
+    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Check Box')]    visible    timeout=5s
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    Close Browser    ALL
+    
+Test Browser Server
+    [Tags]    TEST-36
+    ${browser_server}    Launch Browser Server    headless=false
+    Sleep    1
+    Connect To Browser    ${browser_server}
+    Sleep    1
+    Close Browser Server    ${browser_server}
+    
+Test Crawl Site
+    [Tags]    TEST-37
+    Crawl Site    ${link_herokuapp}    max_number_of_page_to_crawl=20
+    Delete All Cookies
+
+Test Select Options 1
+    [Tags]    TEST-38
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_select}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Select Menu')]    visible    timeout=5s
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    Deselect Options    id=oldSelectMenu
+    Sleep    0.3s
+    Take Screenshot    EMBED    id=oldSelectMenu
+    Select Options By    id=oldSelectMenu    text    Indigo
+    Sleep    0.3s
+    Take Screenshot    EMBED    id=oldSelectMenu
+    Take Screenshot    EMBED
+    Close Browser    ALL
+
+Test Select Options 2
+    [Tags]    TEST-39
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_select}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Select Menu')]    visible    timeout=5s
+    Scroll To Element    id=cars
+    Mouse Wheel    0    75
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    Take Screenshot    EMBED    id=cars
+    Select Options By    id=cars    value    volvo    opel    audi
+    Scroll To Element    id=cars
+    Mouse Wheel    0    75
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    Take Screenshot    EMBED    id=cars
+    Deselect Options    id=cars
+    Scroll To Element    id=cars
+    Mouse Wheel    0    75
+    Sleep    0.3s
+    Take Screenshot    EMBED    id=cars
+    Close Browser    ALL
+
+Test Eat All Cookies
+    [Tags]    TEST-40
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_select}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Eat All Cookies
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Select Menu')]    visible    timeout=5s
     Close Browser    ALL
