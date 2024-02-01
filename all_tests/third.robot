@@ -881,6 +881,7 @@ Test Close Page 3
     
 Test Browser Server
     [Tags]    TEST-36
+    Log    here should be Launch Browser Server, but in Github Actions it does not work    level=WARN
     ${browser_server}    Launch Browser Server    headless=false
     Sleep    1
     Connect To Browser    ${browser_server}
