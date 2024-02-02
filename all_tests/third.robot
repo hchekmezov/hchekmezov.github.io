@@ -44,7 +44,7 @@ Suite Setup Action
 *** Test Cases ***
 Test Download With Promise
     [Tags]    TEST-1
-    New Browser    browser=${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    browser=${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_download}
     Wait For Elements State    //h3    visible    timeout=5s
@@ -62,7 +62,7 @@ Test Download With Promise
 
 Test Download With Download Keyword
     [Tags]    TEST-2
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_download}
     Wait For Elements State    //h3    visible    timeout=5s
@@ -80,7 +80,7 @@ Test Download With Download Keyword
 
 Test Basic Auth
     [Tags]    TEST-3
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     Set Log Level    WARN
     New Page    ${link_basic_auth}
@@ -92,7 +92,7 @@ Test Basic Auth
     
 Test Drag And Drop
     [Tags]    TEST-4
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_drag_and_drop}
     Wait For Elements State    //h3    visible    timeout=2s
@@ -107,7 +107,7 @@ Test Drag And Drop
 
 Test Dropdown
     [Tags]    TEST-5
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_dropdown}
     Wait For Elements State    //h3    visible    timeout=2s
@@ -128,7 +128,7 @@ Test Dropdown
 
 Test Exit Intent
     [Tags]    TEST-6
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_exit_intent}
     Wait For Elements State    //h3[contains(text(), 'Exit Intent')]    visible    timeout=2s
@@ -145,7 +145,7 @@ Test Exit Intent
 
 Test Login 1 - NEGATIVE login with USERNAME
     [Tags]    TEST-7
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_login}
     Wait For Elements State    //h2[contains(text(), 'Login Page')]    visible    timeout=2s
@@ -170,7 +170,7 @@ Test Login 1 - NEGATIVE login with USERNAME
 
 Test Login 2 - NEGATIVE login with PASSWORD
     [Tags]    TEST-8
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_login}
     Wait For Elements State    //h2[contains(text(), 'Login Page')]    visible    timeout=2s
@@ -195,7 +195,7 @@ Test Login 2 - NEGATIVE login with PASSWORD
     
 Test Login 3 - POSITIVE
     [Tags]    TEST-9
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_login}
     Wait For Elements State    //h2[contains(text(), 'Login Page')]    visible    timeout=2s
@@ -229,7 +229,7 @@ Test Login 3 - POSITIVE
 
 Test Nested Frames
     [Tags]    TEST-10
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_nested_frames}
     Wait For Elements State    //frame[@name='frame-top'] >>> //frame[@name='frame-left'] >>> //body[contains(text(), 'LEFT')]
@@ -240,7 +240,7 @@ Test Nested Frames
 
 Test IFrames
     [Tags]    TEST-11
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_iframes}
     Wait For Elements State    //iframe    visible    timeout=2s
@@ -265,7 +265,7 @@ Test IFrames
 
 Test Geolocation
     [Tags]    TEST-12
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     ${permissions}    Create List    geolocation
     New Context    viewport=${None}    acceptDownloads=true    permissions=${permissions}
     New Page    ${link_geolocation}
@@ -283,7 +283,7 @@ Test Geolocation
 
 Test Horizontal Slider
     [Tags]    TEST-13
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_horizontal_slider}
     Wait For Elements State    //h3    visible    timeout=5s
@@ -299,7 +299,7 @@ Test Horizontal Slider
 
 Test Hovers
     [Tags]    TEST-14
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_hovers}
     Wait For Elements State    //h3    visible    timeout=5s
@@ -322,7 +322,7 @@ Test Hovers
 
 Test Alerts ONE
     [Tags]    TEST-15    ALERTS
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_alerts}
     Wait For Elements State    //h3    visible    timeout=5s
@@ -338,7 +338,7 @@ Test Alerts ONE
 
 Test Alerts TWO
     [Tags]    TEST-16    ALERTS
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_alerts}
     Wait For Elements State    //h3    visible    timeout=5s
@@ -352,7 +352,7 @@ Test Alerts TWO
 
 Test Confirm ONE
     [Tags]    TEST-17
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_alerts}
     Wait For Elements State    //h3    visible    timeout=5s
@@ -376,7 +376,7 @@ Test Confirm ONE
 
 Test Confirm TWO
     [Tags]    TEST-18
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_alerts}
     Wait For Elements State    //h3    visible    timeout=5s
@@ -399,7 +399,7 @@ Test Confirm TWO
 
 Test Prompt ONE
     [Tags]    TEST-19
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_alerts}
     Wait For Elements State    //h3    visible    timeout=5s
@@ -423,7 +423,7 @@ Test Prompt ONE
 
 Test Prompt TWO
     [Tags]    TEST-20
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_alerts}
     Wait For Elements State    //h3    visible    timeout=5s
@@ -446,7 +446,7 @@ Test Prompt TWO
 
 Test Key Presses
     [Tags]    TEST-21
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_key_presses}
     Wait For Elements State    //h3    visible    timeout=5s
@@ -484,7 +484,7 @@ Test Key Presses
 
 Test Multiple Windows
     [Tags]    TEST-22
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_multiple_windows}
     Wait For Elements State    //h3    visible    timeout=5s
@@ -513,7 +513,7 @@ Test Multiple Windows
 
 Test Secure File Download
     [Tags]    TEST-23
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     ${log_level}    Set Log Level    WARN
     ${splitted_link}    Set Variable    ${link_secure_file_download.split("//")}
@@ -547,7 +547,7 @@ Test Secure File Download
 
 Test Secure Shadowdom
     [Tags]    TEST-24
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_shadowdom}
     Wait For Elements State    //h1    visible    timeout=3s
@@ -574,7 +574,7 @@ Test Secure Shadowdom
 
 Test Shifting Content Menu Element
     [Tags]    TEST-25
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_shifting_content}
     Wait For Elements State    //h3    visible    timeout=3s
@@ -617,7 +617,7 @@ Test Shifting Content Menu Element
 
 Test Books Store 1
     [Tags]    TEST-26    DEMO    BOOKS
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_books_store}
     Wait For Elements State    //div[@class='main-header' and contains(text(), 'Book Store')]    visible    timeout=5s
@@ -637,7 +637,7 @@ Test Books Store 1
 
 Test Cookies
     [Tags]    TEST-27    DEMO    BOOKS
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_books_store}
     Wait For Elements State    //div[@class='main-header' and contains(text(), 'Book Store')]    visible    timeout=5s
@@ -660,7 +660,7 @@ Test Cookies
 
 Test Checkbox
     [Tags]    TEST-28    DEMO
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_checkbox}
     Wait For Elements State    //div[@class='main-header' and contains(text(), 'Check Box')]    visible    timeout=5s
@@ -706,7 +706,7 @@ Test Checkbox
 
 Test Permissions DEMO
     [Tags]    TEST-29    DEMO
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     Grant Permissions    geolocation    notifications
     New Page    ${demo_automation_practice_form}
@@ -749,7 +749,7 @@ Test Permissions DEMO
 
 Test Clear Text
     [Tags]    TEST-30    DEMO
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_automation_practice_form}
     Wait For Elements State    //div[@class='main-header' and contains(text(), 'Practice Form')]    visible    timeout=4s
@@ -771,7 +771,7 @@ Test Clear Text
 
 Test Buttons
     [Tags]    TEST-31    DEMO
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_buttons}
     Wait For Elements State    //div[@class='main-header' and contains(text(), 'Buttons')]    visible    timeout=5s
@@ -791,7 +791,7 @@ Test Buttons
 
 Test Close Context
     [Tags]    TEST-32
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_buttons}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State    
@@ -813,7 +813,7 @@ Test Close Context
 
 Test Close Page 1
     [Tags]    TEST-33
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_buttons}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -834,7 +834,7 @@ Test Close Page 1
 
 Test Close Page 2
     [Tags]    TEST-34
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_buttons}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -860,7 +860,7 @@ Test Close Page 2
 
 Test Close Page 3
     [Tags]    TEST-35
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_buttons}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -900,7 +900,7 @@ Test Crawl Site
 
 Test Select Options 1
     [Tags]    TEST-38
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_select}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -923,7 +923,7 @@ Test Select Options 1
 
 Test Select Options 2
     [Tags]    TEST-39
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_select}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -950,7 +950,7 @@ Test Select Options 2
 
 Test Eat All Cookies
     [Tags]    TEST-40
-    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    args=["-start-maximized"]
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_select}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
