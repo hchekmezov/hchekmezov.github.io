@@ -647,7 +647,11 @@ Test Cookies
     Log    ${cookies}
     ${is_cookie_exist}    Is Cookie Exist By Name    ${cookies}    hlib
     Should Be True    ${is_cookie_exist}
-    Sleep    20
+    Sleep    15
+#    in firefox fox for some reason temporary cookie is not deleted after time
+    IF    '${BROWSER_TYPE}' == 'firefox'
+        Delete All Cookies
+    END
     ${cookies}    Get Cookies
     Log    ${cookies}
     ${is_cookie_exist}    Is Cookie Exist By Name    ${cookies}    hlib
