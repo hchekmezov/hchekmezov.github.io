@@ -11,6 +11,7 @@ Library    DateTime
 *** Variables ***
 #${BROWSER_TYPE}    chromium
 #${HEAD_MODE}    false
+${USERNAME}    username
 ${link_herokuapp}    https://the-internet.herokuapp.com
 ${link_download}    https://the-internet.herokuapp.com/download
 ${link_basic_auth}    https://admin:admin@the-internet.herokuapp.com/basic_auth
@@ -36,6 +37,8 @@ ${demo_link_checkbox}    https://demoqa.com/checkbox
 ${demo_automation_practice_form}    https://demoqa.com/automation-practice-form
 ${demo_link_buttons}    https://demoqa.com/buttons
 ${demo_link_select}    https://demoqa.com/select-menu
+${demo_link_sortable}    https://demoqa.com/sortable
+${demo_link_droppable}    https://demoqa.com/droppable
 
 *** Keywords ***
 Suite Setup Action
@@ -959,3 +962,142 @@ Test Eat All Cookies
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
     Wait For Elements State    //div[@class='main-header' and contains(text(), 'Select Menu')]    visible    timeout=5s
     Close Browser    ALL
+
+Test Drag And Drop Relative To - LIST
+    [Tags]    TEST-41
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_sortable}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@aria-hidden='false']//div[contains(text(), 'One')]    timeout=5s
+    ${offsetTopOne}    Get Property    //div[@aria-hidden='false']//div[contains(text(), 'One')]    offsetTop
+    ${offsetLeftOne}    Get Property    //div[@aria-hidden='false']//div[contains(text(), 'One')]    offsetLeft
+    ${offsetTopFive}    Get Property    //div[@aria-hidden='false']//div[contains(text(), 'Five')]    offsetTop
+    ${offsetLeftFive}    Get Property    //div[@aria-hidden='false']//div[contains(text(), 'Five')]    offsetLeft
+    ${differenceTop}    Evaluate    ${offsetTopFive} - ${offsetTopOne}
+    ${differenceLeft}    Evaluate    ${offsetLeftFive} - ${offsetLeftOne}
+    Take Screenshot    EMBED
+
+    ${elems}    Get Elements    //div[contains(@class, "vertical-list-container")]/div
+    ${text_before}    Create List
+    FOR    ${elem}    IN   @{elems}
+        ${txt}    Get Text    ${elem}
+        Append To List    ${text_before}    ${txt}
+    END
+    ${should_be_before}    Create List    One    Two    Three    Four    Five    Six
+    Should Be Equal    ${text_before}    ${should_be_before}
+
+    Drag And Drop Relative To    //div[@aria-hidden='false']//div[contains(text(), 'One')]    ${differenceLeft}
+    ...    ${differenceTop}
+    Sleep    0.4s
+    Take Screenshot    EMBED
+
+    ${elems}    Get Elements    //div[contains(@class, "vertical-list-container")]/div
+    ${text_after}    Create List
+    FOR    ${elem}    IN   @{elems}
+        ${txt}    Get Text    ${elem}
+        Append To List    ${text_after}    ${txt}
+    END
+    ${should_be_after}    Create List    Two    Three    Four    Five    One    Six
+    Should Be Equal    ${text_after}    ${should_be_after}
+    Close Browser    ALL
+
+Test Drag And Drop Relative To - GRID
+    [Tags]    TEST-42
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_sortable}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    id=demo-tab-grid    visible    timeout=3s
+    Click    id=demo-tab-grid
+    Wait For Elements State    //div[@aria-hidden='false']//div[contains(text(), 'One')]    timeout=5s
+    ${offsetTopOne}    Get Property    //div[@aria-hidden='false']//div[contains(text(), 'One')]    offsetTop
+    ${offsetLeftOne}    Get Property    //div[@aria-hidden='false']//div[contains(text(), 'One')]    offsetLeft
+    ${offsetTopFive}    Get Property    //div[@aria-hidden='false']//div[contains(text(), 'Five')]    offsetTop
+    ${offsetLeftFive}    Get Property    //div[@aria-hidden='false']//div[contains(text(), 'Five')]    offsetLeft
+    ${differenceTop}    Evaluate    ${offsetTopFive} - ${offsetTopOne}
+    ${differenceLeft}    Evaluate    ${offsetLeftFive} - ${offsetLeftOne}
+    Take Screenshot    EMBED
+
+    ${elems}    Get Elements    //div[@class="create-grid"]/div
+    ${text_before}    Create List
+    FOR    ${elem}    IN   @{elems}
+        ${txt}    Get Text    ${elem}
+        Append To List    ${text_before}    ${txt}
+    END
+    ${should_be_before}    Create List    One    Two    Three    Four    Five    Six    Seven    Eight    Nine
+    Should Be Equal    ${text_before}    ${should_be_before}
+
+    Drag And Drop Relative To    //div[@aria-hidden='false']//div[contains(text(), 'One')]    ${differenceLeft}
+    ...    ${differenceTop}
+    Sleep    0.4s
+    Take Screenshot    EMBED
+
+    ${elems}    Get Elements    //div[@class="create-grid"]/div
+    ${text_after}    Create List
+    FOR    ${elem}    IN   @{elems}
+        ${txt}    Get Text    ${elem}
+        Append To List    ${text_after}    ${txt}
+    END
+    ${should_be_after}    Create List    Two    Three    Four    Five    One    Six    Seven    Eight    Nine
+    Should Be Equal    ${text_after}    ${should_be_after}
+    Close Browser    ALL
+
+Test Drag And Drop To Greedy
+    [Tags]    TEST-43
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_droppable}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    id=droppableExample-tab-preventPropogation    timeout=5s
+    Click    id=droppableExample-tab-preventPropogation
+    ${offsetTopOuter}    Get Property    id=notGreedyDropBox    offsetTop
+    ${offsetLeftOuter}    Get Property    id=notGreedyDropBox    offsetLeft
+    ${offsetTopDragMe}    Get Property    id=dragBox    offsetTop
+    ${offsetLeftDragMe}    Get Property    id=dragBox    offsetLeft
+    ${differenceTop}    Evaluate    ${offsetTopOuter} - ${offsetTopDragMe}
+    ${differenceLeft}    Evaluate    ${offsetLeftOuter} - ${offsetLeftDragMe}
+    Drag And Drop Relative To    id=dragBox    ${differenceLeft}    ${differenceTop}
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    ${result_txt}    Get Text    //div[@id='notGreedyDropBox']/p
+    Should Contain    ${result_txt}    Dropped!
+    ${result_txt}    Get Text    //div[@id='notGreedyInnerDropBox']/p
+    Should Contain    ${result_txt}    Inner droppable (not greedy)
+
+    ${offsetTopOuter}    Get Property    id=notGreedyInnerDropBox    offsetTop
+    ${offsetLeftOuter}    Get Property    id=notGreedyInnerDropBox    offsetLeft
+    ${offsetTopDragMe}    Get Property    id=dragBox    offsetTop
+    ${offsetLeftDragMe}    Get Property    id=dragBox    offsetLeft
+    ${differenceTop}    Evaluate    ${offsetTopOuter} - ${offsetTopDragMe}
+    ${differenceLeft}    Evaluate    ${offsetLeftOuter} - ${offsetLeftDragMe}
+    Drag And Drop Relative To    id=dragBox    ${differenceLeft}    ${differenceTop}
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    ${result_txt}    Get Text    //div[@id='notGreedyDropBox']/p
+    Should Contain    ${result_txt}    Dropped!
+    ${result_txt}    Get Text    //div[@id='notGreedyInnerDropBox']/p
+    Should Contain    ${result_txt}    Dropped!
+    Close Browser    ALL
+
+Test Fill Secret
+    [Tags]    TEST-44
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_automation_practice_form}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Practice Form')]    timeout=5s
+    Fill Secret    id=firstName    $username
+    Scroll To Element    id=firstName
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    Close Browser    ALL
+    
