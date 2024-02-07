@@ -39,6 +39,7 @@ ${demo_link_buttons}    https://demoqa.com/buttons
 ${demo_link_select}    https://demoqa.com/select-menu
 ${demo_link_sortable}    https://demoqa.com/sortable
 ${demo_link_droppable}    https://demoqa.com/droppable
+${demo_link_progress_bar}    https://demoqa.com/progress-bar
 
 *** Keywords ***
 Suite Setup Action
@@ -1100,4 +1101,164 @@ Test Fill Secret
     Sleep    0.3s
     Take Screenshot    EMBED
     Close Browser    ALL
+   
+Test Get Attribute
+    [Tags]    TEST-45
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_progress_bar}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Progress Bar')]
+    ...    visible    timeout=5 s
+    ${value_min}    Get Attribute    //div[@id="progressBar"]/div    aria-valuemin
+    ${value_max}    Get Attribute    //div[@id="progressBar"]/div    aria-valuemax
+    Should Be Equal As Integers    ${value_min}    ${0}
+    Should Be Equal As Integers    ${value_max}    ${100}
+    Click    id=startStopButton
+    Sleep    1.37s
+    Click    id=startStopButton
+    ${value_now}    Get Attribute    //div[@id="progressBar"]/div    aria-valuenow
+    ${cur_text}    Get Text    //div[@id="progressBar"]/div
+    Should Not Be Equal As Integers    ${value_now}    ${0}
+    Should Contain    ${cur_text}    ${value_now}
+    Close Browser    ALL
+
+Test Get Attribute Names
+    [Tags]    TEST-46
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_progress_bar}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Progress Bar')]
+    ...    visible    timeout=5 s
+    Click    id=startStopButton
+    Sleep    1.37s
+    Click    id=startStopButton
+    ${attribute_names}    Get Attribute Names    //div[@id="progressBar"]/div
+    Log    ${attribute_names}
+    Close Browser    ALL
+
+Test Bounding Box
+    [Tags]    TEST-47
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_droppable}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Droppable')]
+    ${bounding_box}    Get Boundingbox    //div[@id='droppableExample-tabpane-simple']//*[@id='droppable']
+    Log    ${bounding_box}
+    Close Browser    ALL
+
+Test Get Classes
+    [Tags]    TEST-48
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_progress_bar}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Progress Bar')]
+    ...    visible    timeout=5 s
+    Click    id=startStopButton
+    Sleep    1.37s
+    Click    id=startStopButton
+    ${classes}    Get Classes    //div[@id="progressBar"]/div
+    Log    ${classes}
+    Close Browser    ALL
+
+Test Get Client Size
+    [Tags]    TEST-49
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_progress_bar}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Progress Bar')]
+    ...    visible    timeout=5 s
+    ${page_client_size}    Get Client Size
+    Log    ${page_client_size}
+    ${size_of_elem}    Get Client Size    id=startStopButton
+    Log    ${size_of_elem}
+    Close Browser    ALL
+
+Test Get Console Log
+    [Tags]    TEST-50
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_progress_bar}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Progress Bar')]
+    ...    visible    timeout=5 s
+    ${console_log}    Get Console Log
+    Log    ${console_log}
+    Close Browser    ALL
+
+Test Get Device
+    [Tags]    TEST-51
+    ${device}=    Get Device       iPhone X
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Context    &{device}
+    New Page    ${demo_link_progress_bar}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Progress Bar')]
+    ...    visible    timeout=5 s
+    ${viewport_size}    Get Viewport Size
+    Should Be Equal As Integers    ${375}    ${viewport_size}[width]
+    Should Be Equal As Integers    ${812}    ${viewport_size}[height]
+    Sleep    0.4s
+    Take Screenshot    EMBED
+    Close Browser    ALL
     
+Test Get Devices
+    [Tags]    TEST-52
+    ${possible_devices}    Get Devices
+    Log    ${possible_devices}
+
+Test Get Element By
+    [Tags]    TEST-53
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_progress_bar}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Progress Bar')]
+    ...    visible    timeout=5 s
+    ${elem_start}    Get Element By    Text    Start
+    Click    ${elem_start}
+    Sleep    2.36s
+    ${elem_stop}    Get Element By    Text    Stop
+    Click    ${elem_stop}
+    ${value_now}    Get Attribute    //div[@id="progressBar"]/div    aria-valuenow
+    Should Not Be Equal As Integers    ${value_now}    ${0}
+    Close Browser    ALL
+
+Test Get Element By Role
+    [Tags]    TEST-54
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_progress_bar}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Progress Bar')]
+    ...    visible    timeout=5 s
+    ${elem_start}    Get Element By Role    button    name=/start/i
+    Click    ${elem_start}
+    Sleep    2.36s
+    ${elem_stop}    Get Element By Role    button    name=/stop/i
+    Click    ${elem_stop}
+    ${value_now}    Get Attribute    //div[@id="progressBar"]/div    aria-valuenow
+    Should Not Be Equal As Integers    ${value_now}    ${0}
+    Close Browser    ALL
