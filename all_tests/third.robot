@@ -40,6 +40,7 @@ ${demo_link_select}    https://demoqa.com/select-menu
 ${demo_link_sortable}    https://demoqa.com/sortable
 ${demo_link_droppable}    https://demoqa.com/droppable
 ${demo_link_progress_bar}    https://demoqa.com/progress-bar
+${demo_link_browser_windows}    https://demoqa.com/browser-windows
 
 *** Keywords ***
 Suite Setup Action
@@ -1262,3 +1263,177 @@ Test Get Element By Role
     ${value_now}    Get Attribute    //div[@id="progressBar"]/div    aria-valuenow
     Should Not Be Equal As Integers    ${value_now}    ${0}
     Close Browser    ALL
+
+Test Get Element Count
+    [Tags]    TEST-55
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_browser_windows}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Browser Windows')]
+    ...    visible    timeout=5 s
+    Get Element Count    //button    >=    3
+    Close Browser    ALL
+
+Test Get Element States
+    [Tags]    TEST-56
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_browser_windows}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Browser Windows')]
+    ...    visible    timeout=5 s
+    ${states}    Get Element States    id=tabButton
+    Log    ${states}
+    Should Contain    ${states}    defocused
+    Should Not Contain    ${states}    focused
+    Focus    id=tabButton
+    Sleep    0.9s
+    ${states}    Get Element States    id=tabButton
+    Log    ${states}
+    Should Contain    ${states}    focused
+    Should Not Contain    ${states}    defocused
+    Close Browser    ALL
+    
+Test Get Elements
+    [Tags]    TEST-57
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_browser_windows}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Browser Windows')]
+    ...    visible    timeout=5 s
+    ${btns}    Get Elements    //button
+    FOR    ${btn}    IN    @{btns}
+        ${states}    Get Element States    ${btn}
+        ${is_visible}    Run Keyword And Return Status    Should Contain    ${states}    visible
+        Run Keyword If    ${is_visible}    Click    ${btn}
+    END
+    Sleep    0.4s
+    ${browser_catalog}    Get Browser Catalog
+    Log    ${browser_catalog}
+    Close Browser    ALL
+
+Test Get Page Errors
+    [Tags]    TEST-58
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_browser_windows}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Browser Windows')]
+    ...    visible    timeout=5 s
+    ${btns}    Get Elements    //button
+    FOR    ${btn}    IN    @{btns}
+        ${states}    Get Element States    ${btn}
+        ${is_visible}    Run Keyword And Return Status    Should Contain    ${states}    visible
+        Run Keyword If    ${is_visible}    Click    ${btn}
+    END
+    Sleep    0.336s
+    ${page_errors}    Get Page Errors
+    Log    ${page_errors}
+    Close Browser    ALL
+
+Test Get Page Ids
+    [Tags]    TEST-59
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_browser_windows}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Browser Windows')]
+    ...    visible    timeout=5 s
+    ${btns}    Get Elements    //button
+    FOR    ${btn}    IN    @{btns}
+        ${states}    Get Element States    ${btn}
+        ${is_visible}    Run Keyword And Return Status    Should Contain    ${states}    visible
+        Run Keyword If    ${is_visible}    Click    ${btn}
+    END
+    Sleep    0.336s
+    ${page_ids}    Get Page Ids
+    Log    ${page_ids}
+    Close Browser    ALL
+    
+Test Get Page Source
+    [Tags]    TEST-60
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_browser_windows}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Browser Windows')]
+    ...    visible    timeout=5 s
+    ${html}    Get Page Source
+    Log    ${html}
+    Close Browser    ALL
+    
+Test Get Property
+    [Tags]    TEST-61
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_browser_windows}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Browser Windows')]
+    ...    visible    timeout=5 s
+    ${innerText}    Get Property    id=windowButton    innerText
+    Log    ${innerText}
+    Should Be Equal As Strings    ${innerText}    New Window
+    Close Browser    ALL
+    
+Test Get Scroll Position
+    [Tags]    TEST-62
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_browser_windows}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Browser Windows')]
+    ...    visible    timeout=5 s
+    ${scroll_pos}    Get Scroll Position
+    Log    ${scroll_pos}
+    ${scroll_pos_elem}    Get Scroll Position    id=messageWindowButton
+    Log    ${scroll_pos_elem}
+    Close Browser    ALL
+    
+Test Get Scroll Size
+    [Tags]    TEST-63
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_browser_windows}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Browser Windows')]
+    ...    visible    timeout=5 s
+    ${scroll_pos}    Get Scroll Size
+    Log    ${scroll_pos}
+    ${scroll_pos_elem}    Get Scroll Size    id=messageWindowButton
+    Log    ${scroll_pos_elem}
+    Close Browser    ALL
+
+Test Get Style
+    [Tags]    TEST-64
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_browser_windows}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Browser Windows')]
+    ...    visible    timeout=5 s
+    ${style}    Get Style    id=messageWindowButton
+    Log    ${style}
+    Close Browser    ALL
+    
