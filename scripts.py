@@ -149,3 +149,7 @@ def create_javascript_command_for_permission_status(permission):
     return "navigator.permissions.query({ name: '" + permission + "' })" \
             ".then(permissionStatus => { return permissionStatus.state; })" \
             ".catch(error => { return 'Error checking permission: ' + error; });"
+
+
+def lists_intersection(lst1, lst2):
+    return list(set(lst1) & set(lst2))

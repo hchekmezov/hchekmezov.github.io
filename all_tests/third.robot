@@ -41,6 +41,8 @@ ${demo_link_sortable}    https://demoqa.com/sortable
 ${demo_link_droppable}    https://demoqa.com/droppable
 ${demo_link_progress_bar}    https://demoqa.com/progress-bar
 ${demo_link_browser_windows}    https://demoqa.com/browser-windows
+${demo_link_webtables}    https://demoqa.com/webtables
+${test_link_tables}    https://testrigor.com/samples/table1/
 
 *** Keywords ***
 Suite Setup Action
@@ -1436,4 +1438,134 @@ Test Get Style
     ${style}    Get Style    id=messageWindowButton
     Log    ${style}
     Close Browser    ALL
-    
+
+Test Get Table Cell Element
+    [Tags]    TEST-65
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${test_link_tables}
+    Wait For Elements State    //h1[contains(text(), 'Sample Table')]    timeout=3 s
+    ${table}=    Set Variable    //table/thead/..
+    Scroll To Element    ${table}
+    ${e}=    Get Table Cell Element    ${table}    "Name"    "york1"
+    ${txt}    Get Text    ${e}
+    Log    ${txt}
+    Should Be Equal As Strings    Yorktown    ${txt}
+    ${table_cell_index}    Get Table Cell Index    ${table} >> "Name"
+    ${table_row_index}    Get Table Row Index    ${table} >> "Spock"
+    ${e}=    Get Table Cell Element    ${table}    ${table_cell_index}    ${table_row_index}
+    ${txt}    Get Text    ${e}
+    Log    ${txt}
+    Should Be Equal As Strings    Spock    ${txt}
+    Close Browser    ALL
+
+Test Get Title
+    [Tags]    TEST-66
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_webtables}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Web Tables')]
+    ...    visible    timeout=5 s
+    ${title}    Get Title
+    Log    ${title}
+    Close Browser    ALL
+
+Test Get Url
+    [Tags]    TEST-67
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_webtables}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Web Tables')]
+    ...    visible    timeout=5 s
+    ${cur_url}    Get Url
+    Should Be Equal As Strings    ${cur_url}    ${demo_link_webtables}
+    Close Browser    ALL
+
+Test Get Viewport Size
+    [Tags]    TEST-68
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_webtables}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Web Tables')]
+    ...    visible    timeout=5 s
+    ${viewport_size}    Get Viewport Size
+    Log    ${viewport_size}
+    Close Browser    ALL
+
+Test Go Back / Go Forward / Go To
+    [Tags]    TEST-69
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Context    viewport=${None}    acceptDownloads=true
+    ${google_link}    Set Variable    https://www.google.com/
+    New Page    ${google_link}
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    ${cur_url}    Get Url
+    Should Be Equal As Strings    ${google_link}    ${cur_url}
+    ${is_accept_cookies}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/div[contains(text(), 'Accept all')]/..    visible    timeout=3 s
+    Run Keyword If    ${is_accept_cookies}    Click    //button/div[contains(text(), 'Accept all')]/..
+    Go To    ${demo_link_webtables}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Web Tables')]
+    ...    visible    timeout=5 s
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    ${cur_url}    Get Url
+    Should Be Equal As Strings    ${cur_url}    ${demo_link_webtables}
+    Go Back
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    ${cur_url}    Get Url
+    Should Be Equal As Strings    ${cur_url}    ${google_link}
+    Go Forward
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    ${cur_url}    Get Url
+    Should Be Equal As Strings    ${cur_url}    ${demo_link_webtables}
+    Close Browser    ALL
+
+Test Highlight Elements
+    [Tags]    TEST-70
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_automation_practice_form}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Practice Form')]
+    ...    visible    timeout=5 s
+    Scroll To Element    id=firstName
+    Log    Highlight Elements keyword does not work properly!    level=WARN
+    Highlight Elements    id=firstName
+    Close Browser    ALL
+
+Test Keyboard Input
+    [Tags]    TEST-71
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_automation_practice_form}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Practice Form')]
+    ...    visible    timeout=5 s
+    Scroll To Element    id=firstName
+    Click    id=firstName
+    Keyboard Input    insertText    glepchik
+    Click    id=lastName
+    Keyboard Input    type    mezov
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    Close Browser    ALL
