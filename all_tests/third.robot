@@ -1113,7 +1113,7 @@ Test Get Attribute
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Progress Bar')]
+    Wait For Elements State    //h1[contains(text(), 'Progress Bar')]
     ...    visible    timeout=5 s
     ${value_min}    Get Attribute    //div[@id="progressBar"]/div    aria-valuemin
     ${value_max}    Get Attribute    //div[@id="progressBar"]/div    aria-valuemax
@@ -1136,7 +1136,7 @@ Test Get Attribute Names
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Progress Bar')]
+    Wait For Elements State    //h1[contains(text(), 'Progress Bar')]
     ...    visible    timeout=5 s
     Click    id=startStopButton
     Sleep    1.37s
@@ -1153,7 +1153,7 @@ Test Bounding Box
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Droppable')]
+    Wait For Elements State    //h1[contains(text(), 'Droppable')]
     ${bounding_box}    Get Boundingbox    //div[@id='droppableExample-tabpane-simple']//*[@id='droppable']
     Log    ${bounding_box}
     Close Browser    ALL
@@ -1166,7 +1166,7 @@ Test Get Classes
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Progress Bar')]
+    Wait For Elements State    //h1[contains(text(), 'Progress Bar')]
     ...    visible    timeout=5 s
     Click    id=startStopButton
     Sleep    1.37s
@@ -1183,7 +1183,7 @@ Test Get Client Size
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Progress Bar')]
+    Wait For Elements State    //h1[contains(text(), 'Progress Bar')]
     ...    visible    timeout=5 s
     ${page_client_size}    Get Client Size
     Log    ${page_client_size}
@@ -1199,7 +1199,7 @@ Test Get Console Log
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Progress Bar')]
+    Wait For Elements State    //h1[contains(text(), 'Progress Bar')]
     ...    visible    timeout=5 s
     ${console_log}    Get Console Log
     Log    ${console_log}
@@ -1214,7 +1214,7 @@ Test Get Device
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Progress Bar')]
+    Wait For Elements State    //h1[contains(text(), 'Progress Bar')]
     ...    visible    timeout=5 s
     ${viewport_size}    Get Viewport Size
     Should Be Equal As Integers    ${375}    ${viewport_size}[width]
@@ -1236,7 +1236,7 @@ Test Get Element By
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Progress Bar')]
+    Wait For Elements State    //h1[contains(text(), 'Progress Bar')]
     ...    visible    timeout=5 s
     ${elem_start}    Get Element By    Text    Start
     Click    ${elem_start}
@@ -1255,7 +1255,7 @@ Test Get Element By Role
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Progress Bar')]
+    Wait For Elements State    //h1[contains(text(), 'Progress Bar')]
     ...    visible    timeout=5 s
     ${elem_start}    Get Element By Role    button    name=/start/i
     Click    ${elem_start}
@@ -1274,7 +1274,7 @@ Test Get Element Count
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Browser Windows')]
+    Wait For Elements State    //h1[contains(text(), 'Browser Windows')]
     ...    visible    timeout=5 s
     Get Element Count    //button    >=    3
     Close Browser    ALL
@@ -1287,7 +1287,7 @@ Test Get Element States
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Browser Windows')]
+    Wait For Elements State    //h1[contains(text(), 'Browser Windows')]
     ...    visible    timeout=5 s
     ${states}    Get Element States    id=tabButton
     Log    ${states}
@@ -1309,7 +1309,7 @@ Test Get Elements
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Browser Windows')]
+    Wait For Elements State    //h1[contains(text(), 'Browser Windows')]
     ...    visible    timeout=5 s
     ${btns}    Get Elements    //button
     FOR    ${btn}    IN    @{btns}
@@ -1330,7 +1330,7 @@ Test Get Page Errors
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Browser Windows')]
+    Wait For Elements State    //h1[contains(text(), 'Browser Windows')]
     ...    visible    timeout=5 s
     ${btns}    Get Elements    //button
     FOR    ${btn}    IN    @{btns}
@@ -1351,7 +1351,7 @@ Test Get Page Ids
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Browser Windows')]
+    Wait For Elements State    //h1[contains(text(), 'Browser Windows')]
     ...    visible    timeout=5 s
     ${btns}    Get Elements    //button
     FOR    ${btn}    IN    @{btns}
@@ -1372,7 +1372,7 @@ Test Get Page Source
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Browser Windows')]
+    Wait For Elements State    //h1[contains(text(), 'Browser Windows')]
     ...    visible    timeout=5 s
     ${html}    Get Page Source
     Log    ${html}
@@ -1386,7 +1386,7 @@ Test Get Property
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Browser Windows')]
+    Wait For Elements State    //h1[contains(text(), 'Browser Windows')]
     ...    visible    timeout=5 s
     ${innerText}    Get Property    id=windowButton    innerText
     Log    ${innerText}
@@ -1401,7 +1401,7 @@ Test Get Scroll Position
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Browser Windows')]
+    Wait For Elements State    //h1[contains(text(), 'Browser Windows')]
     ...    visible    timeout=5 s
     ${scroll_pos}    Get Scroll Position
     Log    ${scroll_pos}
@@ -1417,7 +1417,7 @@ Test Get Scroll Size
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Browser Windows')]
+    Wait For Elements State    //h1[contains(text(), 'Browser Windows')]
     ...    visible    timeout=5 s
     ${scroll_pos}    Get Scroll Size
     Log    ${scroll_pos}
@@ -1433,7 +1433,7 @@ Test Get Style
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Browser Windows')]
+    Wait For Elements State    //h1[contains(text(), 'Browser Windows')]
     ...    visible    timeout=5 s
     ${style}    Get Style    id=messageWindowButton
     Log    ${style}
@@ -1467,7 +1467,7 @@ Test Get Title
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Web Tables')]
+    Wait For Elements State    //h1[contains(text(), 'Web Tables')]
     ...    visible    timeout=5 s
     ${title}    Get Title
     Log    ${title}
@@ -1481,7 +1481,7 @@ Test Get Url
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Web Tables')]
+    Wait For Elements State    //h1[contains(text(), 'Web Tables')]
     ...    visible    timeout=5 s
     ${cur_url}    Get Url
     Should Be Equal As Strings    ${cur_url}    ${demo_link_webtables}
@@ -1495,7 +1495,7 @@ Test Get Viewport Size
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Web Tables')]
+    Wait For Elements State    //h1[contains(text(), 'Web Tables')]
     ...    visible    timeout=5 s
     ${viewport_size}    Get Viewport Size
     Log    ${viewport_size}
@@ -1518,7 +1518,7 @@ Test Go Back / Go Forward / Go To
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Web Tables')]
+    Wait For Elements State    //h1[contains(text(), 'Web Tables')]
     ...    visible    timeout=5 s
     Sleep    0.3s
     Take Screenshot    EMBED
@@ -1544,7 +1544,7 @@ Test Highlight Elements
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Practice Form')]
+    Wait For Elements State    //h1[contains(text(), 'Practice Form')]
     ...    visible    timeout=5 s
     Scroll To Element    id=firstName
     Log    Highlight Elements keyword does not work properly!    level=WARN
@@ -1559,7 +1559,7 @@ Test Keyboard Input
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class="main-header" and contains(text(), 'Practice Form')]
+    Wait For Elements State    //h1[contains(text(), 'Practice Form')]
     ...    visible    timeout=5 s
     Scroll To Element    id=firstName
     Click    id=firstName
@@ -1568,4 +1568,48 @@ Test Keyboard Input
     Keyboard Input    type    mezov
     Sleep    0.3s
     Take Screenshot    EMBED
+    Close Browser    ALL
+
+Test LocalStorage
+    [Tags]    TEST-72
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_automation_practice_form}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //h1[contains(text(), 'Practice Form')]
+    ...    visible    timeout=5 s
+    Local Storage Set Item    localKey    localValue
+    Sleep    1
+    ${value}    Local Storage Get Item    localKey
+    Should Be Equal As Strings    ${value}    localValue
+    Local Storage Remove Item    localKey
+    Sleep    1
+    ${item}=    Local Storage Get Item    localKey
+    Should Be Equal    ${item}    ${None}
+    Local Storage Set Item    newLocalKey    newLocalValue
+    Sleep    1
+    ${value}    Local Storage Get Item    newLocalKey
+    Should Be Equal As Strings    ${value}    newLocalValue
+    Local Storage Clear    
+    Sleep    1
+    ${item}=    Local Storage Get Item    newLocalKey
+    Should Be Equal    ${item}    ${None}
+    Close Browser
+
+Test Mouse Button
+    [Tags]    TEST-73
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_link_buttons}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //h1[contains(text(), 'Buttons')]
+    ...    visible    timeout=5 s
+    Mouse Move Relative To    (//button[contains(text(), 'Click Me')])[3]
+    Sleep    1
+    Mouse Button    action=click    clickCount=2    delay=20 ms
+    Wait For Elements State    id=dynamicClickMessage    visible    timeout=5 s
     Close Browser    ALL
