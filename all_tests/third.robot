@@ -627,7 +627,7 @@ Test Books Store 1
     New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_books_store}
-    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Book Store')]    visible    timeout=5s
+    Wait For Elements State    //h1[contains(text(), 'Book Store')]    visible    timeout=5s
     Scroll To Element    (//a[contains(@href, '/books')])[1]
     Sleep    0.5s
     Take Screenshot    EMBED
@@ -647,7 +647,7 @@ Test Cookies
     New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_books_store}
-    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Book Store')]    visible    timeout=5s
+    Wait For Elements State    //h1[contains(text(), 'Book Store')]    visible    timeout=5s
     ${date}    Get Current Date    increment=15 secs
     Add Cookie    hlib    chekmezov    domain=example.com    path=/foo/bar    expires=${date}
     ${cookies}    Get Cookies
@@ -670,7 +670,7 @@ Test Checkbox
     New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_checkbox}
-    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Check Box')]    visible    timeout=5s
+    Wait For Elements State    //h1[contains(text(), 'Check Box')]    visible    timeout=5s
     Scroll To Element    //span[@class='rct-title' and contains(text(), 'Home')]
     Sleep    0.3s
     Take Screenshot    EMBED
@@ -717,7 +717,7 @@ Test Permissions DEMO
     New Context    viewport=${None}    acceptDownloads=true
     Grant Permissions    geolocation    notifications
     New Page    ${demo_automation_practice_form}
-    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Practice Form')]    visible    timeout=4s
+    Wait For Elements State    //h1[contains(text(), 'Practice Form')]    visible    timeout=4s
 
     ${js_command}    Create Javascript Command For Permission Status    geolocation
     ${result}    Evaluate Javascript    ${None}    ${js_command}
@@ -759,7 +759,7 @@ Test Clear Text
     New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_automation_practice_form}
-    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Practice Form')]    visible    timeout=4s
+    Wait For Elements State    //h1[contains(text(), 'Practice Form')]    visible    timeout=4s
     ${name}    Get Text    id=firstName
     Should Be Equal As Strings    ${EMPTY}    ${name}
     Sleep    0.3s
@@ -781,7 +781,7 @@ Test Buttons
     New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_buttons}
-    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Buttons')]    visible    timeout=5s
+    Wait For Elements State    //h1[contains(text(), 'Buttons')]    visible    timeout=5s
     Click With Options    id=doubleClickBtn    clickCount=2
     Wait For Condition    Text    id=doubleClickMessage    contains    You have done a double click
     Sleep    0.3s
@@ -804,7 +804,7 @@ Test Close Context
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State    
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Buttons')]    visible    timeout=5s
+    Wait For Elements State    //h1[contains(text(), 'Buttons')]    visible    timeout=5s
     Sleep    0.3s
     Take Screenshot    EMBED
     Close Context    CURRENT    CURRENT
@@ -813,7 +813,7 @@ Test Close Context
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Practice Form')]    visible    timeout=4s
+    Wait For Elements State    //h1[contains(text(), 'Practice Form')]    visible    timeout=4s
     Sleep    0.3s
     Take Screenshot    EMBED
     Close Browser    ALL
@@ -826,7 +826,7 @@ Test Close Page 1
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Buttons')]    visible    timeout=5s
+    Wait For Elements State    //h1[contains(text(), 'Buttons')]    visible    timeout=5s
     Sleep    0.3s
     Take Screenshot    EMBED
     Close Page    CURRENT    CURRENT    CURRENT
@@ -834,7 +834,7 @@ Test Close Page 1
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Practice Form')]    visible    timeout=4s
+    Wait For Elements State    //h1[contains(text(), 'Practice Form')]    visible    timeout=4s
     Sleep    0.3s
     Take Screenshot    EMBED
     Close Browser    ALL
@@ -847,20 +847,20 @@ Test Close Page 2
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Buttons')]    visible    timeout=5s
+    Wait For Elements State    //h1[contains(text(), 'Buttons')]    visible    timeout=5s
     Sleep    0.3s
     Take Screenshot    EMBED
     New Page    ${demo_automation_practice_form}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Practice Form')]    visible    timeout=4s
+    Wait For Elements State    //h1[contains(text(), 'Practice Form')]    visible    timeout=4s
     Sleep    0.3s
     Take Screenshot    EMBED
     Close Page    CURRENT    CURRENT    CURRENT
     Sleep    1.5s
     New Page    ${demo_link_checkbox}
-    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Check Box')]    visible    timeout=5s
+    Wait For Elements State    //h1[contains(text(), 'Check Box')]    visible    timeout=5s
     Sleep    0.3s
     Take Screenshot    EMBED
     Close Browser    ALL
@@ -873,20 +873,20 @@ Test Close Page 3
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Buttons')]    visible    timeout=5s
+    Wait For Elements State    //h1[contains(text(), 'Buttons')]    visible    timeout=5s
     Sleep    0.3s
     Take Screenshot    EMBED
     New Page    ${demo_automation_practice_form}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Practice Form')]    visible    timeout=4s
+    Wait For Elements State    //h1[contains(text(), 'Practice Form')]    visible    timeout=4s
     Sleep    0.3s
     Take Screenshot    EMBED
     Close Page    ALL    ALL    ALL
     Sleep    1.5s
     New Page    ${demo_link_checkbox}
-    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Check Box')]    visible    timeout=5s
+    Wait For Elements State    //h1[contains(text(), 'Check Box')]    visible    timeout=5s
     Sleep    0.3s
     Take Screenshot    EMBED
     Close Browser    ALL
@@ -913,7 +913,7 @@ Test Select Options 1
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Select Menu')]    visible    timeout=5s
+    Wait For Elements State    //h1[contains(text(), 'Select Menu')]    visible    timeout=5s
     Sleep    0.3s
     Take Screenshot    EMBED
     Scroll To Element    id=oldSelectMenu
@@ -936,7 +936,7 @@ Test Select Options 2
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Select Menu')]    visible    timeout=5s
+    Wait For Elements State    //h1[contains(text(), 'Select Menu')]    visible    timeout=5s
     Scroll To Element    id=cars
     Mouse Wheel    0    75
     Sleep    0.3s
@@ -964,7 +964,7 @@ Test Eat All Cookies
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Eat All Cookies
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Select Menu')]    visible    timeout=5s
+    Wait For Elements State    //h1[contains(text(), 'Select Menu')]    visible    timeout=5s
     Close Browser    ALL
 
 Test Drag And Drop Relative To - LIST
@@ -1098,7 +1098,7 @@ Test Fill Secret
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
     ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
     Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
-    Wait For Elements State    //div[@class='main-header' and contains(text(), 'Practice Form')]    timeout=5s
+    Wait For Elements State    //h1[contains(text(), 'Practice Form')]    timeout=5s
     Fill Secret    id=firstName    $username
     Scroll To Element    id=firstName
     Sleep    0.3s
