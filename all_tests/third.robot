@@ -1613,3 +1613,174 @@ Test Mouse Button
     Mouse Button    action=click    clickCount=2    delay=20 ms
     Wait For Elements State    id=dynamicClickMessage    visible    timeout=5 s
     Close Browser    ALL
+
+Test New Browser - devtools check
+    [Tags]    TEST-74
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    devtools=true
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_automation_practice_form}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //h1[contains(text(), 'Practice Form')]
+    ...    visible    timeout=5 s
+    Scroll To Element    id=firstName
+    Click    id=firstName
+    Keyboard Input    insertText    glepchik
+    Click    id=lastName
+    Keyboard Input    type    mezov
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    Close Browser    ALL
+
+Test New Browser - slowMo check
+    [Tags]    TEST-75
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    slowMo=1 s
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_automation_practice_form}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //h1[contains(text(), 'Practice Form')]
+    ...    visible    timeout=5 s
+    Scroll To Element    id=firstName
+    Click    id=firstName
+    Keyboard Input    insertText    glepchik
+    Click    id=lastName
+    Keyboard Input    type    mezov
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    Close Browser    ALL
+
+Test New Context - colorScheme check
+    [Tags]    TEST-76
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}
+    New Context    viewport=${None}    acceptDownloads=true    colorScheme=dark
+    New Page    ${demo_automation_practice_form}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //h1[contains(text(), 'Practice Form')]
+    ...    visible    timeout=5 s
+    Scroll To Element    id=firstName
+    Click    id=firstName
+    Keyboard Input    insertText    glepchik
+    Click    id=lastName
+    Keyboard Input    type    mezov
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    Close Browser    ALL
+
+Test New Context - forcedColors check
+    [Tags]    TEST-77
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}
+    New Context    viewport=${None}    acceptDownloads=true    forcedColors=active
+    New Page    ${demo_automation_practice_form}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //h1[contains(text(), 'Practice Form')]
+    ...    visible    timeout=5 s
+    Scroll To Element    id=firstName
+    Click    id=firstName
+    Keyboard Input    insertText    glepchik
+    Click    id=lastName
+    Keyboard Input    type    mezov
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    Close Browser    ALL
+
+Test New Context - locale check
+    [Tags]    TEST-78
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}
+    New Context    viewport=${None}    acceptDownloads=true    locale=uk-ua    forcedColors=active
+    New Page    ${demo_automation_practice_form}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Погоджуюся')]/..    timeout=1.5s
+    Take Screenshot    filename=EMBED    selector=//button/p[contains(text(), 'Погоджуюся')]/..
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Погоджуюся')]/..
+    Wait For Elements State    //h1[contains(text(), 'Practice Form')]
+    ...    visible    timeout=5 s
+    Scroll To Element    id=firstName
+    Click    id=firstName
+    Keyboard Input    insertText    glepchik
+    Click    id=lastName
+    Keyboard Input    type    mezov
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    Close Browser    ALL
+
+Test New Context - recordHar check
+    [Tags]    TEST-79
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}
+    ${har}=    Create Dictionary     path=${OUTPUT_DIR}/har.file    omitContent=True
+    New Context    viewport=${None}    acceptDownloads=true    forcedColors=active    recordHar=${har}    locale=uk-ua
+    New Page    ${demo_automation_practice_form}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Погоджуюся')]/..    timeout=1.5s
+    Take Screenshot    filename=EMBED    selector=//button/p[contains(text(), 'Погоджуюся')]/..
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Погоджуюся')]/..
+    Wait For Elements State    //h1[contains(text(), 'Practice Form')]
+    ...    visible    timeout=5 s
+    Scroll To Element    id=firstName
+    Click    id=firstName
+    Keyboard Input    insertText    glepchik
+    Click    id=lastName
+    Keyboard Input    type    mezov
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    Close Context    ALL
+    Close Browser    ALL
+    File Should Exist    ${OUTPUT_DIR}/har.file
+    Log    ${OUTPUT_DIR}/har.file
+    Remove File    ${OUTPUT_DIR}/har.file
+    File Should Not Exist    ${OUTPUT_DIR}/har.file
+
+Test New Context - recordVideo check
+    [Tags]    TEST-80
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}
+    New Context    viewport=${None}    acceptDownloads=true    forcedColors=active
+    ...    recordVideo={'dir': '${OUTPUT_DIR}/video', 'size':{'width':1280, 'height':720}}
+    New Page    ${demo_automation_practice_form}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Take Screenshot    filename=EMBED    selector=//button/p[contains(text(), 'Consent')]/..
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //h1[contains(text(), 'Practice Form')]
+    ...    visible    timeout=5 s
+    Scroll To Element    id=firstName
+    Click    id=firstName
+    Keyboard Input    insertText    glepchik
+    Click    id=lastName
+    Keyboard Input    type    mezov
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    Close Context    ALL
+    Close Browser    ALL
+    Directory Should Exist    ${OUTPUT_DIR}/video
+    Empty Directory    ${OUTPUT_DIR}/video
+    Remove Directory    ${OUTPUT_DIR}/video
+    Directory Should Not Exist    ${OUTPUT_DIR}/video
+
+Test Press Keys
+    [Tags]    TEST-81
+    New Browser    ${BROWSER_TYPE}    headless=${HEAD_MODE}
+    New Context    viewport=${None}    acceptDownloads=true
+    New Page    ${demo_automation_practice_form}
+    ${is_consent}    Run Keyword And Return Status    Wait For Elements State
+    ...    //button/p[contains(text(), 'Consent')]/..    timeout=1.5s
+    Take Screenshot    filename=EMBED    selector=//button/p[contains(text(), 'Consent')]/..
+    Run Keyword If    ${is_consent}    Click    //button/p[contains(text(), 'Consent')]/..
+    Wait For Elements State    //h1[contains(text(), 'Practice Form')]
+    ...    visible    timeout=5 s
+    Scroll To Element    id=firstName
+    Press Keys    id=firstName    g  l  e  p  c  h  k  ArrowLeft  i
+    Press Keys    id=lastName    m  e  v  ArrowLeft  o  ArrowLeft  z
+    ${txt_first_name}    Get Text    id=firstName
+    Should Be Equal As Strings    ${txt_first_name}    glepchik
+    ${txt_last_name}    Get Text    id=lastName
+    Should Be Equal As Strings    ${txt_last_name}    mezov
+    Sleep    0.3s
+    Take Screenshot    EMBED
+    Close Context    ALL
+    Close Browser    ALL
