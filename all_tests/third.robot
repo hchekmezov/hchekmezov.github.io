@@ -51,7 +51,7 @@ Suite Setup Action
 *** Test Cases ***
 Test Download With Promise
     [Tags]    TEST-1
-    New Browser    browser=${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_download}
     Wait For Elements State    //h3    visible    timeout=5s
