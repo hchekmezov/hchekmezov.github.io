@@ -51,7 +51,7 @@ Suite Setup Action
 *** Test Cases ***
 Test Download With Promise
     [Tags]    TEST-1
-    New Browser    args=["--headless=new"]    browser=${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_download}
     Wait For Elements State    //h3    visible    timeout=5s
@@ -69,7 +69,7 @@ Test Download With Promise
 
 Test Download With Download Keyword
     [Tags]    TEST-2
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_download}
     Wait For Elements State    //h3    visible    timeout=5s
@@ -87,7 +87,7 @@ Test Download With Download Keyword
 
 Test Basic Auth
     [Tags]    TEST-3
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     Set Log Level    WARN
     New Page    ${link_basic_auth}
@@ -99,7 +99,7 @@ Test Basic Auth
 
 Test Drag And Drop
     [Tags]    TEST-4
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_drag_and_drop}
     Wait For Elements State    //h3    visible    timeout=2s
@@ -114,7 +114,7 @@ Test Drag And Drop
 
 Test Dropdown
     [Tags]    TEST-5
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_dropdown}
     Wait For Elements State    //h3    visible    timeout=2s
@@ -135,7 +135,7 @@ Test Dropdown
 
 Test Exit Intent
     [Tags]    TEST-6
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_exit_intent}
     Wait For Elements State    //h3[contains(text(), 'Exit Intent')]    visible    timeout=2s
@@ -152,7 +152,7 @@ Test Exit Intent
 
 Test Login 1 - NEGATIVE login with USERNAME
     [Tags]    TEST-7
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_login}
     Wait For Elements State    //h2[contains(text(), 'Login Page')]    visible    timeout=2s
@@ -177,7 +177,7 @@ Test Login 1 - NEGATIVE login with USERNAME
 
 Test Login 2 - NEGATIVE login with PASSWORD
     [Tags]    TEST-8
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_login}
     Wait For Elements State    //h2[contains(text(), 'Login Page')]    visible    timeout=2s
@@ -202,7 +202,7 @@ Test Login 2 - NEGATIVE login with PASSWORD
 
 Test Login 3 - POSITIVE
     [Tags]    TEST-9
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_login}
     Wait For Elements State    //h2[contains(text(), 'Login Page')]    visible    timeout=2s
@@ -236,7 +236,7 @@ Test Login 3 - POSITIVE
 
 Test Nested Frames
     [Tags]    TEST-10
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_nested_frames}
     Wait For Elements State    //frame[@name='frame-top'] >>> //frame[@name='frame-left'] >>> //body[contains(text(), 'LEFT')]
@@ -247,7 +247,7 @@ Test Nested Frames
 
 Test IFrames
     [Tags]    TEST-11
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_iframes}
     Wait For Elements State    //iframe    visible    timeout=2s
@@ -272,7 +272,7 @@ Test IFrames
 
 Test Geolocation
     [Tags]    TEST-12
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     ${permissions}    Create List    geolocation
     New Context    viewport=${None}    acceptDownloads=true    permissions=${permissions}
     New Page    ${link_geolocation}
@@ -290,7 +290,7 @@ Test Geolocation
 
 Test Horizontal Slider
     [Tags]    TEST-13
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_horizontal_slider}
     Wait For Elements State    //h3    visible    timeout=5s
@@ -306,7 +306,7 @@ Test Horizontal Slider
 
 Test Hovers
     [Tags]    TEST-14
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_hovers}
     Wait For Elements State    //h3    visible    timeout=5s
@@ -329,7 +329,7 @@ Test Hovers
 
 Test Alerts ONE
     [Tags]    TEST-15    ALERTS
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_alerts}
     Wait For Elements State    //h3    visible    timeout=5s
@@ -345,7 +345,7 @@ Test Alerts ONE
 
 Test Alerts TWO
     [Tags]    TEST-16    ALERTS
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_alerts}
     Wait For Elements State    //h3    visible    timeout=5s
@@ -359,7 +359,7 @@ Test Alerts TWO
 
 Test Confirm ONE
     [Tags]    TEST-17
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_alerts}
     Wait For Elements State    //h3    visible    timeout=5s
@@ -383,7 +383,7 @@ Test Confirm ONE
 
 Test Confirm TWO
     [Tags]    TEST-18
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_alerts}
     Wait For Elements State    //h3    visible    timeout=5s
@@ -406,7 +406,7 @@ Test Confirm TWO
 
 Test Prompt ONE
     [Tags]    TEST-19
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_alerts}
     Wait For Elements State    //h3    visible    timeout=5s
@@ -430,7 +430,7 @@ Test Prompt ONE
 
 Test Prompt TWO
     [Tags]    TEST-20
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_alerts}
     Wait For Elements State    //h3    visible    timeout=5s
@@ -453,7 +453,7 @@ Test Prompt TWO
 
 Test Key Presses
     [Tags]    TEST-21
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_key_presses}
     Wait For Elements State    //h3    visible    timeout=5s
@@ -491,7 +491,7 @@ Test Key Presses
 
 Test Multiple Windows
     [Tags]    TEST-22
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_multiple_windows}
     Wait For Elements State    //h3    visible    timeout=5s
@@ -520,7 +520,7 @@ Test Multiple Windows
 
 Test Secure File Download
     [Tags]    TEST-23
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     ${log_level}    Set Log Level    WARN
     ${splitted_link}    Set Variable    ${link_secure_file_download.split("//")}
@@ -554,7 +554,7 @@ Test Secure File Download
 
 Test Secure Shadowdom
     [Tags]    TEST-24
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_shadowdom}
     Wait For Elements State    //h1    visible    timeout=3s
@@ -581,7 +581,7 @@ Test Secure Shadowdom
 
 Test Shifting Content Menu Element
     [Tags]    TEST-25
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${link_shifting_content}
     Wait For Elements State    //h3    visible    timeout=3s
@@ -624,7 +624,7 @@ Test Shifting Content Menu Element
 
 Test Books Store 1
     [Tags]    TEST-26    DEMO    BOOKS
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_books_store}
     Wait For Elements State    //h1[contains(text(), 'Book Store')]    visible    timeout=5s
@@ -644,7 +644,7 @@ Test Books Store 1
 
 Test Cookies
     [Tags]    TEST-27    DEMO    BOOKS
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_books_store}
     Wait For Elements State    //h1[contains(text(), 'Book Store')]    visible    timeout=5s
@@ -667,7 +667,7 @@ Test Cookies
 
 Test Checkbox
     [Tags]    TEST-28    DEMO
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_checkbox}
     Wait For Elements State    //h1[contains(text(), 'Check Box')]    visible    timeout=5s
@@ -713,7 +713,7 @@ Test Checkbox
 
 Test Permissions DEMO
     [Tags]    TEST-29    DEMO
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     Grant Permissions    geolocation    notifications
     New Page    ${demo_automation_practice_form}
@@ -756,7 +756,7 @@ Test Permissions DEMO
 
 Test Clear Text
     [Tags]    TEST-30    DEMO
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_automation_practice_form}
     Wait For Elements State    //h1[contains(text(), 'Practice Form')]    visible    timeout=4s
@@ -778,7 +778,7 @@ Test Clear Text
 
 Test Buttons
     [Tags]    TEST-31    DEMO
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_buttons}
     Wait For Elements State    //h1[contains(text(), 'Buttons')]    visible    timeout=5s
@@ -798,7 +798,7 @@ Test Buttons
 
 Test Close Context
     [Tags]    TEST-32
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_buttons}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -820,7 +820,7 @@ Test Close Context
 
 Test Close Page 1
     [Tags]    TEST-33
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_buttons}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -841,7 +841,7 @@ Test Close Page 1
 
 Test Close Page 2
     [Tags]    TEST-34
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_buttons}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -867,7 +867,7 @@ Test Close Page 2
 
 Test Close Page 3
     [Tags]    TEST-35
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_buttons}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -907,7 +907,7 @@ Test Crawl Site
 
 Test Select Options 1
     [Tags]    TEST-38
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_select}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -930,7 +930,7 @@ Test Select Options 1
 
 Test Select Options 2
     [Tags]    TEST-39
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_select}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -957,7 +957,7 @@ Test Select Options 2
 
 Test Eat All Cookies
     [Tags]    TEST-40
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_select}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -969,7 +969,7 @@ Test Eat All Cookies
 
 Test Drag And Drop Relative To - LIST
     [Tags]    TEST-41
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_sortable}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -1010,7 +1010,7 @@ Test Drag And Drop Relative To - LIST
 
 Test Drag And Drop Relative To - GRID
     [Tags]    TEST-42
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_sortable}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -1053,7 +1053,7 @@ Test Drag And Drop Relative To - GRID
 
 Test Drag And Drop To Greedy
     [Tags]    TEST-43
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_droppable}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -1092,7 +1092,7 @@ Test Drag And Drop To Greedy
 
 Test Fill Secret
     [Tags]    TEST-44
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_automation_practice_form}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -1107,7 +1107,7 @@ Test Fill Secret
 
 Test Get Attribute
     [Tags]    TEST-45
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_progress_bar}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -1130,7 +1130,7 @@ Test Get Attribute
 
 Test Get Attribute Names
     [Tags]    TEST-46
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_progress_bar}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -1147,7 +1147,7 @@ Test Get Attribute Names
 
 Test Bounding Box
     [Tags]    TEST-47
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_droppable}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -1160,7 +1160,7 @@ Test Bounding Box
 
 Test Get Classes
     [Tags]    TEST-48
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_progress_bar}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -1177,7 +1177,7 @@ Test Get Classes
 
 Test Get Client Size
     [Tags]    TEST-49
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_progress_bar}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -1193,7 +1193,7 @@ Test Get Client Size
 
 Test Get Console Log
     [Tags]    TEST-50
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_progress_bar}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -1208,7 +1208,7 @@ Test Get Console Log
 Test Get Device
     [Tags]    TEST-51
     ${device}=    Get Device       iPhone X
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    &{device}
     New Page    ${demo_link_progress_bar}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -1230,7 +1230,7 @@ Test Get Devices
 
 Test Get Element By
     [Tags]    TEST-53
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_progress_bar}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -1249,7 +1249,7 @@ Test Get Element By
 
 Test Get Element By Role
     [Tags]    TEST-54
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_progress_bar}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -1268,7 +1268,7 @@ Test Get Element By Role
 
 Test Get Element Count
     [Tags]    TEST-55
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_browser_windows}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -1281,7 +1281,7 @@ Test Get Element Count
 
 Test Get Element States
     [Tags]    TEST-56
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_browser_windows}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -1303,7 +1303,7 @@ Test Get Element States
 
 Test Get Elements
     [Tags]    TEST-57
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_browser_windows}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -1324,7 +1324,7 @@ Test Get Elements
 
 Test Get Page Errors
     [Tags]    TEST-58
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_browser_windows}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -1345,7 +1345,7 @@ Test Get Page Errors
 
 Test Get Page Ids
     [Tags]    TEST-59
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_browser_windows}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -1366,7 +1366,7 @@ Test Get Page Ids
 
 Test Get Page Source
     [Tags]    TEST-60
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_browser_windows}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -1380,7 +1380,7 @@ Test Get Page Source
 
 Test Get Property
     [Tags]    TEST-61
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_browser_windows}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -1395,7 +1395,7 @@ Test Get Property
 
 Test Get Scroll Position
     [Tags]    TEST-62
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_browser_windows}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -1411,7 +1411,7 @@ Test Get Scroll Position
 
 Test Get Scroll Size
     [Tags]    TEST-63
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_browser_windows}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -1427,7 +1427,7 @@ Test Get Scroll Size
 
 Test Get Style
     [Tags]    TEST-64
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_browser_windows}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -1441,7 +1441,7 @@ Test Get Style
 
 Test Get Table Cell Element
     [Tags]    TEST-65
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${test_link_tables}
     Wait For Elements State    //h1[contains(text(), 'Sample Table')]    timeout=3 s
@@ -1461,7 +1461,7 @@ Test Get Table Cell Element
 
 Test Get Title
     [Tags]    TEST-66
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_webtables}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -1475,7 +1475,7 @@ Test Get Title
 
 Test Get Url
     [Tags]    TEST-67
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_webtables}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -1489,7 +1489,7 @@ Test Get Url
 
 Test Get Viewport Size
     [Tags]    TEST-68
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_webtables}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -1503,7 +1503,7 @@ Test Get Viewport Size
 
 Test Go Back / Go Forward / Go To
     [Tags]    TEST-69
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     ${google_link}    Set Variable    https://www.google.com/
     New Page    ${google_link}
@@ -1538,7 +1538,7 @@ Test Go Back / Go Forward / Go To
 
 Test Highlight Elements
     [Tags]    TEST-70
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_automation_practice_form}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -1553,7 +1553,7 @@ Test Highlight Elements
 
 Test Keyboard Input
     [Tags]    TEST-71
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_automation_practice_form}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -1572,7 +1572,7 @@ Test Keyboard Input
 
 Test LocalStorage
     [Tags]    TEST-72
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_automation_practice_form}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -1600,7 +1600,7 @@ Test LocalStorage
 
 Test Mouse Button
     [Tags]    TEST-73
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_link_buttons}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -1614,9 +1614,9 @@ Test Mouse Button
     Wait For Elements State    id=dynamicClickMessage    visible    timeout=5 s
     Close Browser    ALL
 
-Test New Browser    args=["--headless=new"] - devtools check
+Test New Browser - devtools check
     [Tags]    TEST-74
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    devtools=true
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.    devtools=true
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_automation_practice_form}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -1633,9 +1633,9 @@ Test New Browser    args=["--headless=new"] - devtools check
     Take Screenshot    EMBED
     Close Browser    ALL
 
-Test New Browser    args=["--headless=new"] - slowMo check
+Test New Browser - slowMo check
     [Tags]    TEST-75
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}    downloadsPath=.    slowMo=1 s
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}    downloadsPath=.    slowMo=1 s
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_automation_practice_form}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -1654,7 +1654,7 @@ Test New Browser    args=["--headless=new"] - slowMo check
 
 Test New Context - colorScheme check
     [Tags]    TEST-76
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}
     New Context    viewport=${None}    acceptDownloads=true    colorScheme=dark
     New Page    ${demo_automation_practice_form}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -1673,7 +1673,7 @@ Test New Context - colorScheme check
 
 Test New Context - forcedColors check
     [Tags]    TEST-77
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}
     New Context    viewport=${None}    acceptDownloads=true    forcedColors=active
     New Page    ${demo_automation_practice_form}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -1692,7 +1692,7 @@ Test New Context - forcedColors check
 
 Test New Context - locale check
     [Tags]    TEST-78
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}
     New Context    viewport=${None}    acceptDownloads=true    locale=uk-ua    forcedColors=active
     New Page    ${demo_automation_practice_form}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
@@ -1712,7 +1712,7 @@ Test New Context - locale check
 
 Test New Context - recordHar check
     [Tags]    TEST-79
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}
     ${har}=    Create Dictionary     path=${OUTPUT_DIR}/har.file    omitContent=True
     New Context    viewport=${None}    acceptDownloads=true    forcedColors=active    recordHar=${har}    locale=uk-ua
     New Page    ${demo_automation_practice_form}
@@ -1738,7 +1738,7 @@ Test New Context - recordHar check
 
 Test New Context - recordVideo check
     [Tags]    TEST-80
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}
     New Context    viewport=${None}    acceptDownloads=true    forcedColors=active
     ...    recordVideo={'dir': '${OUTPUT_DIR}/video', 'size':{'width':1280, 'height':720}}
     New Page    ${demo_automation_practice_form}
@@ -1764,7 +1764,7 @@ Test New Context - recordVideo check
 
 Test Press Keys
     [Tags]    TEST-81
-    New Browser    args=["--headless=new"]    ${BROWSER_TYPE}    headless=${HEAD_MODE}
+    New Browser    browser=${BROWSER_TYPE}    args=["--headless=new"]    headless=${HEAD_MODE}
     New Context    viewport=${None}    acceptDownloads=true
     New Page    ${demo_automation_practice_form}
     ${is_consent}    Run Keyword And Return Status    Wait For Elements State
